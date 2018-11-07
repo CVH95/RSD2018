@@ -1,3 +1,5 @@
+# RSD 2018 MES Server
+
 from flask import Flask, jsonify
 from flask import make_response, abort, request
 from flaskext.mysql import MySQL
@@ -6,7 +8,9 @@ import threading
 import time
 import random
 
+# Initialize MySQL 
 mysql = MySQL()
+#app = Flask(__name__)
 
 class FlaskApp(Flask):
     def __init__(self, *args, **kwargs):
@@ -62,9 +66,8 @@ class FlaskApp(Flask):
         t1 = threading.Thread(target=run_job)
         t1.start()
 
+# Initialize FlaskApp
 app = FlaskApp(__name__)
-#app = Flask(__name__)
-
 
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'rsd'
@@ -72,6 +75,7 @@ app.config['MYSQL_DATABASE_PASSWORD'] = 'rsd2018'
 app.config['MYSQL_DATABASE_DB'] = 'rsd2018'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
+# Event definition
 EventTypes = [
     "PML_Idle",
     "PML_Execute",
@@ -90,6 +94,7 @@ StatusText = [
     "taken"
     ]
 
+# Initialize MySQL in the app
 mysql.init_app(app)
 
 class InvalidUsage(Exception):
@@ -260,7 +265,7 @@ def delete_order(order_id):
     else:
         raise InvalidUsage('Missing ticket in content', status_code=400)
 
-    #TODO: we need to check is the ticket is the same as in the db
+    # We need to check if the ticket is the same as in the db
 
     params = (order_id)
     insert_stmt = ("delete from rsd2018.jobs where id = %s")
@@ -282,5 +287,6 @@ def delete_order(order_id):
 
     return jsonify({'deleted': order_id})
 
+# Run app
 if __name__ == '__main__':
     app.run()
