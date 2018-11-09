@@ -135,7 +135,7 @@ def get_log():
     return jsonify({'logs' : r})
 
 
-
+# @app.route('/log', methods=['POST', 'GET'])
 @app.route('/log', methods=['POST'])
 def postlog_entry():
     if not request.json:
