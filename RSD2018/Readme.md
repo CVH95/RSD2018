@@ -205,7 +205,7 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
 
  Might be due to missplacement of some running commands inside the server script? Don't know yet but the server seems to be working.
 
- ![Screenshot of the server](other/server_1.0.png)
+ ![Screenshot of the server](Server/other/server_1.0.png)
 
 
 ## 2. WorkCell Client.
