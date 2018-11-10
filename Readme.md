@@ -2,6 +2,14 @@
 
 RESTful API designed for the project in the course Robot Systems Design (University of Southern Denmark). The objective is to run and process the orders that the robot workcell has to do. Cell number: 3.
 
+**Software requirments:**
+
+ - Python3 venv virtual environment to run the server.
+ - Python Flask, and its Flask-MySQL extension for running the server.
+ - MySQL.
+ - Flask SQL-alchemy.
+ - Python Requests for the client side.
+
 ## 1. Server 
 
 The MES system is made in Python3 and are using Flask with a SQL extension for the REST api.
@@ -207,16 +215,18 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
 
  Might be due to missplacement of some running commands inside the server script? Don't know yet but the server seems to be working.
 
- ![Screenshot of the server](Server/imgs/server_1.0.png)
+ ![Screenshot of the server](RSD2018/Server/imgs/server_1.0.png)
 
 
 ## 2. WorkCell Client.
 
-The REST Client can interact with the server using the following entries and methods:
+ The REST Client can interact with the server using the following entries and methods:
 
-1. **Logs (POST):**
-  
-Post a new entry to http://localhost:5000/log. Log entries require the following fields:
+ 1. **Logs (POST):**
+
+ What is the url `/logs` for?
+
+ Post a new entry to http://localhost:5000/log. Log entries require the following fields:
 
  - _cell\_id_: **int type**, number of the WorkCell.
  - _comment_: **string type**, comment attached to the entry.
@@ -234,7 +244,125 @@ Post a new entry to http://localhost:5000/log. Log entries require the following
  ('Status code: ', 200)
  Log entry was succesfully added. Refresh the browser to see it on the server.
  ```
- ![Screenshot of the server](Server/imgs/post1.png)
+ ![Screenshot of the server](RSD2018/Server/imgs/post1.png)
+
+ 2. **Orders (GET):**
+
+ Returns a list of the orders available in the database. URL: http://localhost:5000/orders.
+
+ ```sh
+ $ python GET_orders_example.py
+
+ GET request for ORDERS in RSD server in http://localhost:5000/ 
+
+ (' >> Status code: ', 200)
+ (' >> Text: ', u'{"orders":[{"blue":2,"id":1,"red":1,"status":"ready","yellow":0}]}\n')
+ (' >> JSON: ', <bound method Response.json of <Response [200]>>)
+ ```
+ 
+ 3. **Event Types (GET):**
+
+ Returns the list of event types. URL: http://localhost:5000/event_types.
+
+ ```sh
+ $ python GET_events_example.py 
+ 
+ GET request for EVENT TYPES in RSD server in http://localhost:5000/ 
+
+ (' >> Status code: ', 200)
+ (' >> Text: ', u'{"EventTypes":["PML_Idle","PML_Execute","PML_Complete","PML_Held","PML_Suspended","PML_Aborted","PML_Stopped","Order_Start","Order_Done"]}\n')
+ (' >> JSON: ', <bound method Response.json of <Response [200]>>)
+ ```
+
+ 4. **Orders by id (GET, PUT, DELETE):**
+
+ To get an order by its ID use the URL http://localhost:5000/orders/1 (order\_id = 1).
+
+ ```sh
+ $ python db_order_example.py 
+ 
+ GET request for ORDER with ID:1 in RSD server in http://localhost:5000/ 
+
+ (' >> Status code: ', 200)
+ (' >> Text: ', u'{"order":1}\n')
+ (' >> JSON: ', <bound method Response.json of <Response [200]>>)
+ ```
+
+ ### 2.1. Status tracking.
+
+ On success the status code of all REST responses is 200. To check for errors check the server's command line:
+
+ ```sh
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ 127.0.0.1 - - [10/Nov/2018 11:54:49] "GET / HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:17:03] "POST /log HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:17:08] "GET / HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:17:27] "GET /orders HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:27:28] "GET /orders HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:28:29] "GET /orders HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:44:21] "GET /event_types HTTP/1.1" 200 -
+ 127.0.0.1 - - [10/Nov/2018 12:59:17] "GET /orders/1 HTTP/1.1" 200 -
+ ```
+
+## 3. MySQL Database table contents.
+
+Log into MySQL with _rsd_ user credentials. 
+
+```sh
+$ mysql -u rsd -p
+```
+
+Then:
+
+
+```sql
+mysql> use rsd2018;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_rsd2018 |
++-------------------+
+| jobs              |
+| log               |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from jobs;
++----+---------------------+-----+------+--------+--------+--------+
+| id | time                | red | blue | yellow | status | ticket |
++----+---------------------+-----+------+--------+--------+--------+
+|  1 | 2018-10-22 01:10:38 |   1 |    2 |      0 |      1 | NULL   |
++----+---------------------+-----+------+--------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from log;
++----+---------------------+---------+---------------------+-------+
+| id | time                | cell_id | comment             | event |
++----+---------------------+---------+---------------------+-------+
+|  1 | 2018-10-22 01:12:59 |       1 | NULL                |     0 |
+|  2 | 2018-10-22 02:14:02 |       2 | more to come        |     2 |
+|  6 | 2018-10-28 23:38:43 |       2 | Hej                 |     3 |
+| 10 | 2018-10-29 00:03:54 |       2 | Hej                 |     3 |
+| 12 | 2018-10-29 00:23:25 |       2 | curl entry          |     3 |
+| 13 | 2018-10-29 01:25:31 |       2 | curl entry          |     2 |
+| 14 | 2018-10-29 01:33:58 |       2 | curl entry          |     2 |
+| 15 | 2018-10-29 01:34:01 |       2 | curl entry          |     2 |
+| 16 | 2018-10-29 01:34:40 |       2 | curl entry          |     2 |
+| 17 | 2018-10-29 01:34:41 |       2 | curl entry          |     2 |
+| 18 | 2018-10-29 01:34:46 |       2 | curl entry          |     2 |
+| 19 | 2018-10-29 01:34:48 |       2 | curl entry          |     2 |
+| 20 | 2018-10-29 01:34:49 |       2 | curl entry          |     2 |
+| 21 | 2018-11-09 11:13:16 |       3 | Carlos              |     0 |
+| 22 | 2018-11-09 16:55:41 |       3 | Carlos tries 2.0    |     4 |
+| 23 | 2018-11-09 17:03:23 |       3 | Carlos goes for 3.0 |     7 |
+| 24 | 2018-11-09 17:07:28 |       3 | Carlos logs 4.0     |     3 |
+| 25 | 2018-11-10 12:17:02 |       3 | Today is Sabbat     |     0 |
++----+---------------------+---------+---------------------+-------+
+18 rows in set (0.00 sec)
+```
 
 ## References
 

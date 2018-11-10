@@ -1,9 +1,6 @@
 # Ignore backup file 
 RSD2018/Server/original.rsd_2018_app.py.bkp
 
-# Ignore images folder
-RSD2018/Server/other/
-
 # Ignore pycache
 RSD2018/Server/__pycache__/
 

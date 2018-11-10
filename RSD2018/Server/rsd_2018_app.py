@@ -189,10 +189,12 @@ def postlog_entry():
 
     return jsonify({'log_entry': last_row_id})
 
+# Used to return list of event types.
 @app.route('/event_types', methods=['GET'])
 def get_event_types():
     return jsonify({'EventTypes' : EventTypes})
 
+# Used to return list of orders stored in the database.
 @app.route('/orders', methods=['GET'])
 def get_orders():
     r = []
@@ -205,6 +207,7 @@ def get_orders():
 
     return jsonify({'orders' : r})
 
+# Used to get a certain order in the DB by using its id identifier.
 @app.route('/orders/<int:order_id>', methods=['GET'])
 def get_order(order_id):
     return jsonify({'order': order_id})
