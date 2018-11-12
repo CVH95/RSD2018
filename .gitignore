@@ -1,6 +1,9 @@
 # Ignore backup file 
 RSD2018/Server/original.rsd_2018_app.py.bkp
 
+# Ignore old server version
+RSD2018/Server/old_rsd_2018_app.py.
+
 # Ignore pycache
 RSD2018/Server/__pycache__/
 

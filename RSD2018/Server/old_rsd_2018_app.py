@@ -1,3 +1,5 @@
+# RSD 2018 MES Server
+
 from flask import Flask, jsonify
 from flask import make_response, abort, request
 from flaskext.mysql import MySQL
@@ -6,8 +8,9 @@ import threading
 import time
 import random
 
+# Initialize MySQL 
 mysql = MySQL()
-
+#app = Flask(__name__)
 
 class FlaskApp(Flask):
     def __init__(self, *args, **kwargs):
@@ -16,16 +19,14 @@ class FlaskApp(Flask):
 
     def _activate_background_job(self):
         def run_job():
-            time.sleep(1)
             while True:
-                # check if there is enough jobs in the job queue
+                # check if there is enough jobs in the job queueS
                 num = -1
 
                 con = mysql.connect()
                 cur = con.cursor()
 
                 try:
-                    print("  ")
                     cur.execute('''select * from rsd2018.jobs''')
                     num = cur.rowcount
                 except Exception as e:
@@ -52,7 +53,6 @@ class FlaskApp(Flask):
                                    )
 
                     try:
-                        print("  ")
                         cur.execute(insert_stmt, params)
                         con.commit()
                     except Exception as e:
@@ -60,12 +60,13 @@ class FlaskApp(Flask):
                         print(err_str)
 
                 cur.close()
-                con.close()
+
                 time.sleep(5)
 
         t1 = threading.Thread(target=run_job)
         t1.start()
 
+# Initialize FlaskApp
 app = FlaskApp(__name__)
 
 # MySQL configurations
@@ -74,7 +75,7 @@ app.config['MYSQL_DATABASE_PASSWORD'] = 'rsd2018'
 app.config['MYSQL_DATABASE_DB'] = 'rsd2018'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
-
+# Event definition
 EventTypes = [
     "PML_Idle",
     "PML_Execute",
@@ -85,7 +86,7 @@ EventTypes = [
     "PML_Stopped",
     "Order_Start",
     "Order_Done"
-    ]
+	]
 
 StatusText = [
     "undefined",
@@ -93,6 +94,7 @@ StatusText = [
     "taken"
     ]
 
+# Initialize MySQL in the app
 mysql.init_app(app)
 
 class InvalidUsage(Exception):
@@ -133,7 +135,7 @@ def get_log():
     return jsonify({'logs' : r})
 
 
-
+# @app.route('/log', methods=['POST', 'GET'])
 @app.route('/log', methods=['POST'])
 def postlog_entry():
     if not request.json:
@@ -187,32 +189,28 @@ def postlog_entry():
 
     return jsonify({'log_entry': last_row_id})
 
+# Used to return list of event types.
 @app.route('/event_types', methods=['GET'])
 def get_event_types():
     return jsonify({'EventTypes' : EventTypes})
 
+# Used to return list of orders stored in the database.
 @app.route('/orders', methods=['GET'])
 def get_orders():
     r = []
     cur = mysql.connect().cursor()
     cur.execute('''select id, blue, red, yellow, status from rsd2018.jobs''')
     for row in cur.fetchall():
-        print(row)
         r.append({'id':row[0], 'blue':row[1], 'red':row[2], 'yellow':row[3], 'status':StatusText[row[4]]})
 
     cur.close()
 
     return jsonify({'orders' : r})
 
+# Used to get a certain order in the DB by using its id identifier.
 @app.route('/orders/<int:order_id>', methods=['GET'])
 def get_order(order_id):
-    r = []
-    params = (order_id)
-    cur = mysql.connect().cursor()
-    cur.execute(("select id, blue, red, yellow, status from rsd2018.jobs where id = %s"),params)
-    row = cur.fetchone()
-    r.append({'id':row[0], 'blue':row[1], 'red':row[2], 'yellow':row[3], 'status':StatusText[row[4]]})
-    return jsonify({'order': r})
+    return jsonify({'order': order_id})
 
 @app.route('/orders/<int:order_id>', methods=['PUT'])
 def update_order(order_id):
@@ -261,16 +259,16 @@ def update_order(order_id):
 
 @app.route('/orders/<int:order_id>', methods=['DELETE'])
 def delete_order(order_id):
-    #if not request.json:
-    #    raise InvalidUsage('Missing json content', status_code=400)
+    if not request.json:
+        raise InvalidUsage('Missing json content', status_code=400)
 
-    #if 'ticket' in request.json:
-    #    if type(request.json['ticket']) is not str:
-    #        raise InvalidUsage('ticket type is not str', status_code=400)
-    #else:
-    #    raise InvalidUsage('Missing ticket in content', status_code=400)
-    #
-    #TODO: we need to check is the ticket is the same as in the db
+    if 'ticket' in request.json:
+        if type(request.json['ticket']) is not str:
+            raise InvalidUsage('ticket type is not str', status_code=400)
+    else:
+        raise InvalidUsage('Missing ticket in content', status_code=400)
+
+    # We need to check if the ticket is the same as in the db
 
     params = (order_id)
     insert_stmt = ("delete from rsd2018.jobs where id = %s")
@@ -292,5 +290,6 @@ def delete_order(order_id):
 
     return jsonify({'deleted': order_id})
 
+# Run app
 if __name__ == '__main__':
     app.run()
