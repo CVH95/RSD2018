@@ -213,7 +213,7 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
  AttributeError: 'NoneType' object has no attribute 'config'
  ```
 
- Might be due to missplacement of some running commands inside the server script? Don't know yet but the server seems to be working.
+ It is due to missing `con.close()` statement (closing the connection to the database after adding a new job). This issue makes the function that adds jobs to get stuck after the first entry in the database. However, it does not affect the REST API and that is why the other parts of the server work.
 
  ![Screenshot of the server](RSD2018/Server/imgs/server_1.0.png)
 
@@ -276,16 +276,24 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
 
  4. **Orders by id (GET, PUT, DELETE):**
 
- To get an order by its ID use the URL http://localhost:5000/orders/1 (order\_id = 1).
+ To manipulate an order by its ID use the URL http://localhost:5000/orders/1 (order\_id = 1).
+
+ PUT method is used to update an order. This has to be done when the system takes an  brand new fresh order from the server, to change the order **status** from _ready_ to _taken_.
+
+ DELETE method is used to eliminate an order that has been completed from the database.
 
  ```sh
  $ python db_order_example.py 
  
- GET request for ORDER with ID:1 in RSD server in http://localhost:5000/ 
+GET request for ORDER with ID:1 in RSD server in http://localhost:5000/ 
 
- (' >> Status code: ', 200)
- (' >> Text: ', u'{"order":1}\n')
- (' >> JSON: ', <bound method Response.json of <Response [200]>>)
+(' >> Status code: ', 200)
+(' >> Text: ', u'{"order":[{"blue":2,"id":1,"red":1,"status":"ready","yellow":0}]}\n')
+PUT request for ORDER with ID=1 in RSD server in http://localhost:5000/ 
+
+(' >> Status code: ', 200)
+Getting order with ID=1 updated.
+(' >> Text: ', u'{"order":[{"blue":2,"id":1,"red":1,"status":"taken","yellow":0}]}\n')
  ```
 
  ### 2.1. Status tracking.
@@ -316,7 +324,7 @@ Then:
 
 
 ```sql
-mysql> use rsd2018;
+mysql> use rsd2018
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
@@ -334,9 +342,13 @@ mysql> select * from jobs;
 +----+---------------------+-----+------+--------+--------+--------+
 | id | time                | red | blue | yellow | status | ticket |
 +----+---------------------+-----+------+--------+--------+--------+
-|  1 | 2018-10-22 01:10:38 |   1 |    2 |      0 |      1 | NULL   |
+|  1 | 2018-10-22 01:10:38 |   1 |    2 |      0 |      2 | 777BCB |
+|  2 | 2018-11-12 08:50:32 |   2 |    3 |      0 |      1 | NULL   |
+|  3 | 2018-11-12 08:50:38 |   2 |    3 |      0 |      1 | NULL   |
+|  4 | 2018-11-12 08:50:43 |   1 |    0 |      0 |      1 | NULL   |
+|  5 | 2018-11-12 08:50:48 |   1 |    3 |      0 |      1 | NULL   |
 +----+---------------------+-----+------+--------+--------+--------+
-1 row in set (0.00 sec)
+5 rows in set (0.00 sec)
 
 mysql> select * from log;
 +----+---------------------+---------+---------------------+-------+

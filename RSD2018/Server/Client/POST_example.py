@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # Testing POST requests sent to rsd_2018_app.py
 
+# Log entries are used to keep up with the score of the system.
+# Each time that the PackML status changes, a new log entry has to be generated.
+# When an order is started/completed, put the id of the order in the log comment.
+
 import requests
 
 cid = input("Enter WorkCell ID: ")
