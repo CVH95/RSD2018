@@ -222,6 +222,8 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
 
  The REST Client can interact with the server using the following entries and methods:
 
+ ### 2.1. Explanation
+
  1. **Logs (POST):**
 
  What is the url `/logs` for?
@@ -296,7 +298,7 @@ Getting order with ID=1 updated.
 (' >> Text: ', u'{"order":[{"blue":2,"id":1,"red":1,"status":"taken","yellow":0}]}\n')
  ```
 
- ### 2.1. Status tracking.
+ ### 2.2. Status tracking.
 
  On success the status code of all REST responses is 200. To check for errors check the server's command line:
 
@@ -312,6 +314,14 @@ Getting order with ID=1 updated.
  127.0.0.1 - - [10/Nov/2018 12:59:17] "GET /orders/1 HTTP/1.1" 200 -
  ```
 
+ ### 2.3. Workcell manager
+  
+  - _mes\_api.py_ 
+    - Shared library.
+  - _mes\_client.py_
+    - Main script
+
+  ![Flow diagram](RSD2018/Server/imgs/manager.png)
 ## 3. MySQL Database table contents.
 
 Log into MySQL with _rsd_ user credentials. 

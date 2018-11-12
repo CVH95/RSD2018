@@ -34,7 +34,7 @@ class FlaskApp(Flask):
 
                 print("There are " + str(num) + " jobs in queue")
 
-                if num > 0 and num < 5:
+                if num >= 0 and num < 5:
                     # insert a new order in the system
                     params = (
                         random.randint(0, 4),
