@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import mes_api
-#import json
+
 
 # Robot System Design 2018 - SDU
 # REST API Client of the project's MES System
@@ -49,7 +49,7 @@ while True:
                 print "  >> Blue: " + str(jsonObj['orders'][i]['blue'])
                 print "  >> Red: " + str(jsonObj['orders'][i]['red'])
                 print "  >> Yellow: " + str(jsonObj['orders'][i]['yellow'])
-                print "\n" 
+                print "\n"
                 break
 
         # Call PUT method to take an order
@@ -59,6 +59,10 @@ while True:
         else:
             print "PUT request " + _url + _orders + " succesful"
             mes_api.get_time(r.status_code)
+
+            ticket = mes_api.get_ticket(_id)
+           
+            print "Order " + str(_id) + " ticket: " + str(ticket) + "\n"
 
             # Call GET method to see 
             r2 = mes_api.get_single(_url, _orders, _id)
@@ -70,7 +74,7 @@ while True:
 
                 # Call POST method to add new log entry on Order_Start
                 _idstr = str(_id)
-                cmnt = "order id = " + _idstr
+                cmnt = str(ticket)
                 r3 = mes_api.post_log(_url, _log, cell_id, cmnt, events_dict[7])
                 if r3.status_code != 200:
                     print "Raised API Error on POST request. Status code " + str(r3.status_code)
@@ -112,5 +116,3 @@ while True:
 
 
 # Never ending loop
-print "\n"
-print "Connection closed"

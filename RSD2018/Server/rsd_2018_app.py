@@ -244,6 +244,7 @@ def update_order(order_id):
 
     # now generate the ticket, and insert it into the db
     ticket = uuid.uuid4().hex.upper()[0:6]
+    print ("Order " + str(order_id) + "ticket: " + str(ticket))
     ticket_update_stmt = ("update rsd2018.jobs set ticket = %s where id = %s")
     params_2 = (ticket, order_id)
 
