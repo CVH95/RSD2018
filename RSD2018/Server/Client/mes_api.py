@@ -4,6 +4,8 @@ import requests
 import time
 import pymysql.cursors
 import pymysql
+import socket
+import sys
 
 # Robot System Design 2018 - SDU
 # API of the project's MES System
@@ -69,4 +71,32 @@ def post_log(_url, path, cid, cmnt, evt):
 def delete_order(_url, path, d):
     _idd = '/' + str(d)
     d_url = _url + path + _idd
-    return requests.delete(d_url) 
+    return requests.delete(d_url)
+
+# PLC communication during the processing of the order
+def plc_control(_plc, events, _url, _path, cid, cmt):
+    # Create a TCP/IP socket client connected to PLC's server
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_address = ('localhost', 30000)
+    sock.connect(server_address)
+
+    print "Connected to PLC's Server in http://" + server_address[0] + ":" + str(server_address[1]) + "/"
+
+    data = str(_plc)
+
+    sock.send(data)
+    print "Sent order to PLC"
+
+    while True:
+        rcpt = sock.recv(1024)
+        _state = int(rcpt)
+        if _state == 9:
+            break
+        else:
+            print "Server's reply:"
+            print "PackML state update: " + events[_state]
+            evt = events[_state]
+            post_log(_url, _path, cid, cmt, evt)
+    
+    sock.close()
+    print "Connection closed."

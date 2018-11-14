@@ -8,7 +8,7 @@ RESTful API designed for the project in the course Robot Systems Design (Univers
  - Python Flask, and its Flask-MySQL extension for running the server.
  - MySQL.
  - Flask SQL-alchemy.
- - Python Requests for the client side.
+ - Python Requests and PyMySQL for the client side.
 
 ## 1. Server 
 
@@ -317,9 +317,11 @@ Getting order with ID=1 updated.
  ### 2.3. Workcell manager
   
   - _mes\_api.py_ 
-    - Shared library.
+    - Shared library. Uses PyMySQL to connect to database (that way there is no need to use a Flask client app and virtual environments).
   - _mes\_client.py_
     - Main script
+
+ **Flow diagram of the manager:**
 
   ![Flow diagram](RSD2018/Server/imgs/manager.png)
 ## 3. MySQL Database table contents.
@@ -390,5 +392,6 @@ mysql> select * from log;
 
  - Flask [Installation](http://flask.pocoo.org/docs/1.0/installation/#python-version).
  - Flask [Quickstart](http://flask.pocoo.org/docs/1.0/quickstart/).
+ - [PyMySQL](https://pymysql.readthedocs.io/en/latest/user/examples.html) examples.
  - [Flask-MySQL](https://flask-mysql.readthedocs.io/en/latest/) extension.
  - Creating a WebApp from scratch using Python Flask and MySQL [tutorial](https://code.tutsplus.com/es/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972).

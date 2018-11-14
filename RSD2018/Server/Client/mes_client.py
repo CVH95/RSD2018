@@ -43,6 +43,8 @@ while True:
         for i in range(0, lgth):
             if jsonObj['orders'][i]['status'] == 'ready':
                 _id = jsonObj['orders'][i]['id']
+                # Array that will be sent to the PLC
+                _plc = [jsonObj['orders'][i]['blue'], jsonObj['orders'][i]['red'], jsonObj['orders'][i]['yellow'], _id]
                 print "Taking order #" + str(_id)
                 print "Updated order with id: " + str(_id)
                 print "Preparing LEGO bricks:"
@@ -84,18 +86,16 @@ while True:
 
 
                 #####     Order processing      #####
-                #                                   #
-                #                                   #        
-                #                                   #        
-                #                                   #        
-                #                                   #        
-                #                                   #        
-                #                                   #        
+                print "Processing order..."
+                mes_api.die(5)
+                mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
+
+
                 ##### PackML related code here  #####
 
-    # Let's increse suspense
-    print "Processing order..."
-    mes_api.die(15)
+    # For development 
+    #mes_api.die(15)
+    
 
     # DELETE completed order
     resp = mes_api.delete_order(_url, _orders, _id)

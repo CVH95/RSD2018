@@ -1,0 +1,115 @@
+$ python rsd_2018_app.py 
+
+ * Serving Flask app "rsd_2018_app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+  
+There are 5 jobs in queue
+(116, 3, 4, 0, 2)
+(118, 0, 3, 0, 2)
+(119, 1, 1, 2, 1)
+(120, 1, 4, 2, 1)
+(121, 2, 0, 2, 1)
+127.0.0.1 - - [14/Nov/2018 15:32:01] "GET /orders HTTP/1.1" 200 -
+Order 119ticket: E33BCC
+127.0.0.1 - - [14/Nov/2018 15:32:01] "PUT /orders/119 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:01] "GET /orders/119 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:01] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:06] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:09] "POST /log HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:13] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:16] "DELETE /orders/119 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:16] "POST /log HTTP/1.1" 200 -
+(116, 3, 4, 0, 2)
+(118, 0, 3, 0, 2)
+(120, 1, 4, 2, 1)
+(121, 2, 0, 2, 1)
+127.0.0.1 - - [14/Nov/2018 15:32:16] "GET /orders HTTP/1.1" 200 -
+Order 120ticket: AE4507
+127.0.0.1 - - [14/Nov/2018 15:32:16] "PUT /orders/120 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:16] "GET /orders/120 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:16] "POST /log HTTP/1.1" 200 -
+  
+There are 4 jobs in queue
+  
+127.0.0.1 - - [14/Nov/2018 15:32:21] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:24] "POST /log HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:27] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:30] "POST /log HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:33] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:36] "DELETE /orders/120 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:36] "POST /log HTTP/1.1" 200 -
+(116, 3, 4, 0, 2)
+(118, 0, 3, 0, 2)
+(121, 2, 0, 2, 1)
+(122, 2, 0, 2, 1)
+127.0.0.1 - - [14/Nov/2018 15:32:36] "GET /orders HTTP/1.1" 200 -
+Order 121ticket: 7E608E
+127.0.0.1 - - [14/Nov/2018 15:32:36] "PUT /orders/121 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:36] "GET /orders/121 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:36] "POST /log HTTP/1.1" 200 -
+  
+There are 4 jobs in queue
+  
+127.0.0.1 - - [14/Nov/2018 15:32:41] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:44] "POST /log HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:47] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:50] "POST /log HTTP/1.1" 200 -
+  
+There are 5 jobs in queue
+127.0.0.1 - - [14/Nov/2018 15:32:53] "POST /log HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:56] "DELETE /orders/121 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:56] "POST /log HTTP/1.1" 200 -
+(116, 3, 4, 0, 2)
+(118, 0, 3, 0, 2)
+(122, 2, 0, 2, 1)
+(123, 3, 0, 0, 1)
+127.0.0.1 - - [14/Nov/2018 15:32:56] "GET /orders HTTP/1.1" 200 -
+Order 122ticket: 65F800
+127.0.0.1 - - [14/Nov/2018 15:32:56] "PUT /orders/122 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:56] "GET /orders/122 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2018 15:32:56] "POST /log HTTP/1.1" 200 -
+  
+There are 4 jobs in queue
+

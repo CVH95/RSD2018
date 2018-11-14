@@ -1,0 +1,244 @@
+$ python mes_client.py 
+
+##################################
+##  WORKCELL #3 ONLINE MANAGER  ##
+################################## 
+
+Connecting to server on http://localhost:5000 and waiting for new jobs 
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:01 2018 - Status code = 200
+
+Taking order #119
+Updated order with id: 119
+Preparing LEGO bricks:
+  >> Blue: 1
+  >> Red: 1
+  >> Yellow: 2
+
+
+PUT request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:01 2018 - Status code = 200
+
+Order 119 ticket: {u'ticket': u'E33BCC', u'id': 119}
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:01 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: {u'ticket': u'E33BCC', u'id': 119}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:01 2018 - Status code = 200
+
+Processing order...
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Suspended
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Suspended
+  >> cmnt: {u'ticket': u'E33BCC', u'id': 119}
+Server's reply:
+PackML state update: PML_Idle
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Idle
+  >> cmnt: {u'ticket': u'E33BCC', u'id': 119}
+Server's reply:
+PackML state update: PML_Execute
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Execute
+  >> cmnt: {u'ticket': u'E33BCC', u'id': 119}
+Connection closed.
+DELETE request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:15 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: {u'ticket': u'E33BCC', u'id': 119}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:16 2018 - Status code = 200
+
+
+
+Connecting to server on http://localhost:5000 and waiting for new jobs 
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:16 2018 - Status code = 200
+
+Taking order #120
+Updated order with id: 120
+Preparing LEGO bricks:
+  >> Blue: 1
+  >> Red: 4
+  >> Yellow: 2
+
+
+PUT request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:16 2018 - Status code = 200
+
+Order 120 ticket: {u'ticket': u'AE4507', u'id': 120}
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:16 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:16 2018 - Status code = 200
+
+Processing order...
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Idle
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Idle
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+Server's reply:
+PackML state update: PML_Execute
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Execute
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+Server's reply:
+PackML state update: PML_Suspended
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Suspended
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+Server's reply:
+PackML state update: PML_Aborted
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Aborted
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+Server's reply:
+PackML state update: PML_Held
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Held
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+Connection closed.
+DELETE request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:36 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: {u'ticket': u'AE4507', u'id': 120}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:36 2018 - Status code = 200
+
+
+
+Connecting to server on http://localhost:5000 and waiting for new jobs 
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:36 2018 - Status code = 200
+
+Taking order #121
+Updated order with id: 121
+Preparing LEGO bricks:
+  >> Blue: 2
+  >> Red: 0
+  >> Yellow: 2
+
+
+PUT request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:36 2018 - Status code = 200
+
+Order 121 ticket: {u'ticket': u'7E608E', u'id': 121}
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:36 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:36 2018 - Status code = 200
+
+Processing order...
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Stopped
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Stopped
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+Server's reply:
+PackML state update: PML_Stopped
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Stopped
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+Server's reply:
+PackML state update: PML_Suspended
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Suspended
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+Server's reply:
+PackML state update: PML_Execute
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Execute
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+Server's reply:
+PackML state update: PML_Aborted
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Aborted
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+Connection closed.
+DELETE request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:56 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: {u'ticket': u'7E608E', u'id': 121}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:56 2018 - Status code = 200
+
+
+
+Connecting to server on http://localhost:5000 and waiting for new jobs 
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:56 2018 - Status code = 200
+
+Taking order #122
+Updated order with id: 122
+Preparing LEGO bricks:
+  >> Blue: 2
+  >> Red: 0
+  >> Yellow: 2
+
+
+PUT request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:56 2018 - Status code = 200
+
+Order 122 ticket: {u'ticket': u'65F800', u'id': 122}
+
+GET request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:56 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: {u'ticket': u'65F800', u'id': 122}
+POST request http://localhost:5000/orders succesful
+On Wed Nov 14 15:32:56 2018 - Status code = 200
+
