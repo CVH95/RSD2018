@@ -1,0 +1,3 @@
+$ python Client/tests/DELETE_orders_example.py 
+Flushed some jobs in the database
+

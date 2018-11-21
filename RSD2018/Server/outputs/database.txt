@@ -1,18 +1,16 @@
 mysql> select * from jobs;
-
 +-----+---------------------+-----+------+--------+--------+--------+
 | id  | time                | red | blue | yellow | status | ticket |
 +-----+---------------------+-----+------+--------+--------+--------+
-| 116 | 2018-11-13 10:52:43 |   4 |    3 |      0 |      2 | 2B1659 |
-| 118 | 2018-11-13 10:52:53 |   3 |    0 |      0 |      2 | 670B81 |
-| 122 | 2018-11-14 15:32:18 |   0 |    2 |      2 |      2 | 65F800 |
-| 123 | 2018-11-14 15:32:38 |   0 |    3 |      0 |      1 | NULL   |
-| 124 | 2018-11-14 15:32:58 |   3 |    3 |      2 |      1 | NULL   |
+| 128 | 2018-11-21 11:56:44 |   1 |    2 |      2 |      2 | B61BB4 |
+| 131 | 2018-11-21 12:06:34 |   2 |    1 |      1 |      2 | F205DF |
+| 132 | 2018-11-21 12:06:39 |   3 |    1 |      1 |      1 | NULL   |
+| 133 | 2018-11-21 12:06:49 |   4 |    0 |      2 |      1 | NULL   |
+| 134 | 2018-11-21 12:07:04 |   1 |    3 |      2 |      1 | NULL   |
 +-----+---------------------+-----+------+--------+--------+--------+
 5 rows in set (0.00 sec)
 
 mysql> select * from log;
-
 +-----+---------------------+---------+------------------------------------+-------+
 | id  | time                | cell_id | comment                            | event |
 +-----+---------------------+---------+------------------------------------+-------+
@@ -318,6 +316,428 @@ mysql> select * from log;
 | 307 | 2018-11-14 15:32:53 |       3 | {u'ticket': u'7E608E', u'id': 121} |     5 |
 | 308 | 2018-11-14 15:32:56 |       3 | {u'ticket': u'7E608E', u'id': 121} |     8 |
 | 309 | 2018-11-14 15:32:56 |       3 | {u'ticket': u'65F800', u'id': 122} |     7 |
+| 310 | 2018-11-21 11:55:11 |       3 | {u'ticket': u'4534B1', u'id': 123} |     7 |
+| 311 | 2018-11-21 11:55:16 |       3 | {u'ticket': u'4534B1', u'id': 123} |     6 |
+| 312 | 2018-11-21 11:55:19 |       3 | {u'ticket': u'4534B1', u'id': 123} |     3 |
+| 313 | 2018-11-21 11:55:22 |       3 | {u'ticket': u'4534B1', u'id': 123} |     8 |
+| 314 | 2018-11-21 11:55:23 |       3 | {u'ticket': u'D2F9C7', u'id': 124} |     7 |
+| 315 | 2018-11-21 11:55:44 |       3 | {u'ticket': u'1EA5EF', u'id': 125} |     7 |
+| 316 | 2018-11-21 11:55:49 |       3 | {u'ticket': u'1EA5EF', u'id': 125} |     1 |
+| 317 | 2018-11-21 11:55:52 |       3 | {u'ticket': u'1EA5EF', u'id': 125} |     2 |
+| 318 | 2018-11-21 11:55:55 |       3 | {u'ticket': u'1EA5EF', u'id': 125} |     2 |
+| 319 | 2018-11-21 11:55:58 |       3 | {u'ticket': u'1EA5EF', u'id': 125} |     8 |
+| 320 | 2018-11-21 11:55:59 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     7 |
+| 321 | 2018-11-21 11:56:04 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     1 |
+| 322 | 2018-11-21 11:56:07 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     0 |
+| 323 | 2018-11-21 11:56:10 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     1 |
+| 324 | 2018-11-21 11:56:13 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     5 |
+| 325 | 2018-11-21 11:56:16 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     0 |
+| 326 | 2018-11-21 11:56:19 |       3 | {u'ticket': u'CDB4E1', u'id': 126} |     8 |
+| 327 | 2018-11-21 11:56:24 |       3 | {u'ticket': u'C7F114', u'id': 127} |     7 |
+| 328 | 2018-11-21 11:56:29 |       3 | {u'ticket': u'C7F114', u'id': 127} |     0 |
+| 329 | 2018-11-21 11:56:32 |       3 | {u'ticket': u'C7F114', u'id': 127} |     6 |
+| 330 | 2018-11-21 11:56:35 |       3 | {u'ticket': u'C7F114', u'id': 127} |     5 |
+| 331 | 2018-11-21 11:56:38 |       3 | {u'ticket': u'C7F114', u'id': 127} |     2 |
+| 332 | 2018-11-21 11:56:41 |       3 | {u'ticket': u'C7F114', u'id': 127} |     8 |
+| 333 | 2018-11-21 11:56:44 |       3 | {u'ticket': u'B61BB4', u'id': 128} |     7 |
+| 334 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 335 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 336 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 337 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 338 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 339 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 340 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 341 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 342 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 343 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 344 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 345 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 346 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 347 | 2018-11-21 12:02:09 |       3 | waiting - all orders taken         |     0 |
+| 348 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 349 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 350 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 351 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 352 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 353 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 354 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 355 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 356 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 357 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 358 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 359 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 360 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 361 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 362 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 363 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 364 | 2018-11-21 12:02:10 |       3 | waiting - all orders taken         |     0 |
+| 365 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 366 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 367 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 368 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 369 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 370 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 371 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 372 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 373 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 374 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 375 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 376 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 377 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 378 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 379 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 380 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 381 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 382 | 2018-11-21 12:02:11 |       3 | waiting - all orders taken         |     0 |
+| 383 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 384 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 385 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 386 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 387 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 388 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 389 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 390 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 391 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 392 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 393 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 394 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 395 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 396 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 397 | 2018-11-21 12:02:12 |       3 | waiting - all orders taken         |     0 |
+| 398 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 399 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 400 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 401 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 402 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 403 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 404 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 405 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 406 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 407 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 408 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 409 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 410 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 411 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 412 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 413 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 414 | 2018-11-21 12:02:13 |       3 | waiting - all orders taken         |     0 |
+| 415 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 416 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 417 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 418 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 419 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 420 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 421 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 422 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 423 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 424 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 425 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 426 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 427 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 428 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 429 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 430 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 431 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 432 | 2018-11-21 12:02:14 |       3 | waiting - all orders taken         |     0 |
+| 433 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 434 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 435 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 436 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 437 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 438 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 439 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 440 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 441 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 442 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 443 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 444 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 445 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 446 | 2018-11-21 12:02:15 |       3 | waiting - all orders taken         |     0 |
+| 447 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 448 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 449 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 450 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 451 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 452 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 453 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 454 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 455 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 456 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 457 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 458 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 459 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 460 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 461 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 462 | 2018-11-21 12:02:16 |       3 | waiting - all orders taken         |     0 |
+| 463 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 464 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 465 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 466 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 467 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 468 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 469 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 470 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 471 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 472 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 473 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 474 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 475 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 476 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 477 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 478 | 2018-11-21 12:02:17 |       3 | waiting - all orders taken         |     0 |
+| 479 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 480 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 481 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 482 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 483 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 484 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 485 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 486 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 487 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 488 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 489 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 490 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 491 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 492 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 493 | 2018-11-21 12:02:18 |       3 | waiting - all orders taken         |     0 |
+| 494 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 495 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 496 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 497 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 498 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 499 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 500 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 501 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 502 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 503 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 504 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 505 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 506 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 507 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 508 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 509 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 510 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 511 | 2018-11-21 12:02:19 |       3 | waiting - all orders taken         |     0 |
+| 512 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 513 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 514 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 515 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 516 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 517 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 518 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 519 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 520 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 521 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 522 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 523 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 524 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 525 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 526 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 527 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 528 | 2018-11-21 12:02:20 |       3 | waiting - all orders taken         |     0 |
+| 529 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 530 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 531 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 532 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 533 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 534 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 535 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 536 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 537 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 538 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 539 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 540 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 541 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 542 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 543 | 2018-11-21 12:02:21 |       3 | waiting - all orders taken         |     0 |
+| 544 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 545 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 546 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 547 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 548 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 549 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 550 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 551 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 552 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 553 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 554 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 555 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 556 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 557 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 558 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 559 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 560 | 2018-11-21 12:02:22 |       3 | waiting - all orders taken         |     0 |
+| 561 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 562 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 563 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 564 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 565 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 566 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 567 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 568 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 569 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 570 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 571 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 572 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 573 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 574 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 575 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 576 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 577 | 2018-11-21 12:02:23 |       3 | waiting - all orders taken         |     0 |
+| 578 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 579 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 580 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 581 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 582 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 583 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 584 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 585 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 586 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 587 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 588 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 589 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 590 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 591 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 592 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 593 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 594 | 2018-11-21 12:02:24 |       3 | waiting - all orders taken         |     0 |
+| 595 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 596 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 597 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 598 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 599 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 600 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 601 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 602 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 603 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 604 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 605 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 606 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 607 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 608 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 609 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 610 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 611 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 612 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 613 | 2018-11-21 12:02:25 |       3 | waiting - all orders taken         |     0 |
+| 614 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 615 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 616 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 617 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 618 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 619 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 620 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 621 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 622 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 623 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 624 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 625 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 626 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 627 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 628 | 2018-11-21 12:02:26 |       3 | waiting - all orders taken         |     0 |
+| 629 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 630 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 631 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 632 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 633 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 634 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 635 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 636 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 637 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 638 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 639 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 640 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 641 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 642 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 643 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 644 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 645 | 2018-11-21 12:02:27 |       3 | waiting - all orders taken         |     0 |
+| 646 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 647 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 648 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 649 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 650 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 651 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 652 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 653 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 654 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 655 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 656 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 657 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 658 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 659 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 660 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 661 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 662 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 663 | 2018-11-21 12:02:28 |       3 | waiting - all orders taken         |     0 |
+| 664 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 665 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 666 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 667 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 668 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 669 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 670 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 671 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 672 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 673 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 674 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 675 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 676 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 677 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 678 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 679 | 2018-11-21 12:02:29 |       3 | waiting - all orders taken         |     0 |
+| 680 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 681 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 682 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 683 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 684 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 685 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 686 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 687 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 688 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 689 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 690 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 691 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 692 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 693 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 694 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 695 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 696 | 2018-11-21 12:02:30 |       3 | waiting - all orders taken         |     0 |
+| 697 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 698 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 699 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 700 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 701 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 702 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 703 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 704 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 705 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 706 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 707 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 708 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 709 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 710 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 711 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 712 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 713 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 714 | 2018-11-21 12:02:31 |       3 | waiting - all orders taken         |     0 |
+| 715 | 2018-11-21 12:05:43 |       3 | waiting - all orders taken         |     0 |
+| 716 | 2018-11-21 12:05:51 |       3 | waiting - all orders taken         |     0 |
+| 717 | 2018-11-21 12:05:59 |       3 | waiting - all orders taken         |     0 |
+| 718 | 2018-11-21 12:06:07 |       3 | waiting - all orders taken         |     0 |
+| 719 | 2018-11-21 12:06:15 |       3 | waiting - all orders taken         |     0 |
+| 720 | 2018-11-21 12:06:23 |       3 | waiting - all orders taken         |     0 |
+| 721 | 2018-11-21 12:06:32 |       3 | {u'ticket': u'536F93', u'id': 129} |     7 |
+| 722 | 2018-11-21 12:06:37 |       3 | {u'ticket': u'536F93', u'id': 129} |     1 |
+| 723 | 2018-11-21 12:06:40 |       3 | {u'ticket': u'536F93', u'id': 129} |     3 |
+| 724 | 2018-11-21 12:06:43 |       3 | {u'ticket': u'536F93', u'id': 129} |     4 |
+| 725 | 2018-11-21 12:06:46 |       3 | {u'ticket': u'536F93', u'id': 129} |     6 |
+| 726 | 2018-11-21 12:06:49 |       3 | {u'ticket': u'536F93', u'id': 129} |     8 |
+| 727 | 2018-11-21 12:06:49 |       3 | {u'ticket': u'69CA83', u'id': 130} |     7 |
+| 728 | 2018-11-21 12:06:54 |       3 | {u'ticket': u'69CA83', u'id': 130} |     3 |
+| 729 | 2018-11-21 12:06:57 |       3 | {u'ticket': u'69CA83', u'id': 130} |     0 |
+| 730 | 2018-11-21 12:07:00 |       3 | {u'ticket': u'69CA83', u'id': 130} |     8 |
+| 731 | 2018-11-21 12:07:00 |       3 | {u'ticket': u'F205DF', u'id': 131} |     7 |
 +-----+---------------------+---------+------------------------------------+-------+
-302 rows in set (0.00 sec)
+724 rows in set (0.00 sec)
 

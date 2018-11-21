@@ -1,43 +1,19 @@
-$ python plc_fake_server.py 
-
+$ python plc_tests/plc_fake_server.py
+ 
 PLC running TCP/IP Server on http://localhost:30000/
-Accepted connection from 127.0.0.1:53868
-Order: [0, 2, 0, 117]
-Sending PackML state upadate.
-Sending PackML state upadate.
-Server shut down
-
-$ python plc_fake_server.py 
-
-PLC running TCP/IP Server on http://localhost:30000/
-Accepted connection from 127.0.0.1:54016
-Order: [1, 1, 2, 119]
-Sending PackML state upadate.
-Sending PackML state upadate.
-Sending PackML state upadate.
-Server shut down
-
-$ python plc_fake_server.py 
-
-PLC running TCP/IP Server on http://localhost:30000/
-Accepted connection from 127.0.0.1:54062
-Order: [1, 4, 2, 120]
-Sending PackML state upadate.
+Accepted connection from 127.0.0.1:49470
+Order: [2, 2, 1, 129]
 Sending PackML state upadate.
 Sending PackML state upadate.
 Sending PackML state upadate.
 Sending PackML state upadate.
 Server shut down
 
-$ python plc_fake_server.py 
+$ python plc_tests/plc_fake_server.py 
 
 PLC running TCP/IP Server on http://localhost:30000/
-Accepted connection from 127.0.0.1:54120
-Order: [2, 0, 2, 121]
-Sending PackML state upadate.
-Sending PackML state upadate.
-Sending PackML state upadate.
+Accepted connection from 127.0.0.1:49520
+Order: [1, 1, 1, 130]
 Sending PackML state upadate.
 Sending PackML state upadate.
 Server shut down
-

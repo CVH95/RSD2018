@@ -9,6 +9,7 @@ import sys
 
 # Robot System Design 2018 - SDU
 # API of the project's MES System
+# Carlos, Caroline, Daniel
 
 # Print current timestamp
 def get_time(stcode):
