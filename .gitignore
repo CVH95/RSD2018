@@ -6,11 +6,14 @@ RSD2018/Server/old_rsd_2018_app.py
 
 # Ignore .pyc
 # Ignore old server version
-RSD2018/Server/Client/mes_api.pyc
+RSD2018/Client/mes_api.pyc
 
 # Ignore pycache
 RSD2018/Server/__pycache__/
-RSD2018/Server/Client/__pycache__/
+RSD2018/Client/__pycache__/
 
 # Ignore Virtual Environment files
 RSD2018/Server/venv/
+
+# Ignore full Server directory
+RSD2018/Server/
