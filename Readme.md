@@ -187,35 +187,9 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
  # Don't know if there is a difference...
  ```
  
- - **Execution bug:**
+ Capture of log contents in the browser:
 
- ```sh
- $ . venv/bin/activate
- (venv)$ export FLASK_APP=rsd_2018_app.py 
- (venv)$ python -m flask run
-
- * Serving Flask app "rsd_2018_app.py"
- * Environment: production
-   WARNING: Do not use the development server in a production environment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
- Exception in thread Thread-1:
- Traceback (most recent call last):
-  File "/usr/lib/python3.5/threading.py", line 914, in _bootstrap_inner
-    self.run()
-  File "/usr/lib/python3.5/threading.py", line 862, in run
-    self._target(*self._args, **self._kwargs)
-  File "/home/charlie/Workspace/WebProgramming/RSD2018/RSD2018/Server/rsd_2018_app.py", line 24, in run_job
-    con = mysql.connect()
-  File "/home/charlie/Workspace/WebProgramming/RSD2018/RSD2018/Server/venv/lib/python3.5/site-packages/flaskext/mysql.py", line 39, in connect
-    if self.app.config['MYSQL_DATABASE_HOST']:
- AttributeError: 'NoneType' object has no attribute 'config'
- ```
-
- It is due to missing `con.close()` statement (closing the connection to the database after adding a new job). This issue makes the function that adds jobs to get stuck after the first entry in the database. However, it does not affect the REST API and that is why the other parts of the server work.
-
- ![Screenshot of the server](RSD2018/Server/imgs/server_1.0.png)
+ ![Screenshot of the server](RSD2018/imgs/server_1.0.png)
 
 
 ## 2. WorkCell Client.
@@ -246,7 +220,10 @@ Finally, try to run _mysqladmin_, which is a client that lets you run administra
  ('Status code: ', 200)
  Log entry was succesfully added. Refresh the browser to see it on the server.
  ```
- ![Screenshot of the server](RSD2018/Server/imgs/post1.png)
+
+Check at the bottom of the browser that the new log was added correctly into the database.
+
+ ![Screenshot of the server](RSD2018/imgs/post1.png)
 
  2. **Orders (GET):**
 
@@ -323,7 +300,8 @@ Getting order with ID=1 updated.
 
  **Flow diagram of the manager:**
 
-  ![Flow diagram](RSD2018/Server/imgs/manager.png)
+  ![Flow diagram](RSD2018/imgs/mes_blocks.png)
+
 ## 3. MySQL Database table contents.
 
 Log into MySQL with _rsd_ user credentials. 
@@ -388,6 +366,58 @@ mysql> select * from log;
 18 rows in set (0.00 sec)
 ```
 
+## 4. Raspberry Pi set up.
+
+The real client manager will be implemented in a Raspberry Pi model 3B. The MES Server will be implemented in a remote machine at IP address 192.168.1.200 over _RSD MES 2018_ WiFi. But the MES system also requires handling communications over Ethernet to the PLC. 
+
+Therefore, the RPi must act as a router, configured such that:
+
+  - Communications with devices on IPs below 192.168.1.X (for example 192.168.1.50) will be handled by the **eth0** channel. This means that the PLC must use a static IP below X.X.X.50.
+  - Communications with devices above 192.168.1.X (for example 192.168.1.50) will be carried over **wlan0** (MES server).
+
+Use the following command to check the routing tables:
+
+```sh
+$ route
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         homerouter.cpe  0.0.0.0         UG    600    0        0 wlp2s0
+link-local      *               255.255.0.0     U     1000   0        0 wlp2s0
+192.168.1.0     *               255.255.255.0   U     600    0        0 wlp2s0
+```
+
+## 5. Debugging
+
+- **Create jobs execution bug:**
+
+ ```sh
+ $ . venv/bin/activate
+ (venv)$ export FLASK_APP=rsd_2018_app.py 
+ (venv)$ python -m flask run
+
+ * Serving Flask app "rsd_2018_app.py"
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ Exception in thread Thread-1:
+ Traceback (most recent call last):
+  File "/usr/lib/python3.5/threading.py", line 914, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.5/threading.py", line 862, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/charlie/Workspace/WebProgramming/RSD2018/RSD2018/Server/rsd_2018_app.py", line 24, in run_job
+    con = mysql.connect()
+  File "/home/charlie/Workspace/WebProgramming/RSD2018/RSD2018/Server/venv/lib/python3.5/site-packages/flaskext/mysql.py", line 39, in connect
+    if self.app.config['MYSQL_DATABASE_HOST']:
+ AttributeError: 'NoneType' object has no attribute 'config'
+ ```
+
+ It is due to missing `con.close()` statement (closing the connection to the database after adding a new job). This issue makes the function that adds jobs to get stuck after the first entry in the database. However, it does not affect the REST API and that is why the other parts of the server work, but it does not create jobs.
+
+
 ## References
 
  - Flask [Installation](http://flask.pocoo.org/docs/1.0/installation/#python-version).
@@ -395,3 +425,4 @@ mysql> select * from log;
  - [PyMySQL](https://pymysql.readthedocs.io/en/latest/user/examples.html) examples.
  - [Flask-MySQL](https://flask-mysql.readthedocs.io/en/latest/) extension.
  - Creating a WebApp from scratch using Python Flask and MySQL [tutorial](https://code.tutsplus.com/es/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972).
+ - [Simultaneous WiFi and Ethernet access](http://www.knight-of-pi.org/setup-simultanous-ethernet-and-wifi-access-for-the-raspberry-pi-3/) for Raspberry Pi.
