@@ -11,9 +11,18 @@ import sys
 # API of the project's MES System
 # Carlos, Caroline, Daniel
 
+# Global variables
+global_score = 0
+
 # Print current timestamp
 def get_time(stcode):
-    print "On " + time.strftime("%c") + " - Status code = " + str(stcode) + "\n"
+    tBody = "On " + time.strftime("%c") + " - Status code = " + str(stcode) + "\n"
+    return tBody
+
+# Get order list (GET)
+def get_events(_url, evp):
+    g_url = _url + evp
+    return requests.get(g_url)
 
 # Get order list (GET)
 def get_orders(_url, path):
@@ -76,6 +85,7 @@ def delete_order(_url, path, d):
 
 # PLC communication during the processing of the order
 def plc_control(_plc, events, _url, _path, cid, cmt):
+    global global_score
     # Create a TCP/IP socket client connected to PLC's server
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ('localhost', 30000)
@@ -92,6 +102,7 @@ def plc_control(_plc, events, _url, _path, cid, cmt):
         rcpt = sock.recv(1024)
         _state = int(rcpt)
         if _state == 9:
+            global_score = global_score + 1
             break
         else:
             print "Server's reply:"

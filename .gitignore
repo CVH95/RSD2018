@@ -7,6 +7,7 @@ RSD2018/Server/old_rsd_2018_app.py
 # Ignore .pyc
 # Ignore old server version
 RSD2018/Client/mes_api.pyc
+RSD2018/Client/feedback_api.pyc
 
 # Ignore pycache
 RSD2018/Server/__pycache__/

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import mes_api
-
+import feedback_api
 
 # Robot System Design 2018 - SDU
 # REST API Client of the project's MES System
@@ -20,6 +20,7 @@ _events = '/event_types'
 # Define global variables
 cell_id = 3
 events_dict = {0:'PML_Idle', 1:'PML_Execute', 2:'PML_Complete', 3:'PML_Held', 4:'PML_Suspended', 5:'PML_Aborted', 6:'PML_Stopped', 7:'Order_Start', 8:'Order_Done'}
+mes_api.global_score = 0
 
 #mysql = MySQL()
 
@@ -36,7 +37,8 @@ while True:
         print "Raised API Error on GET request. Status code " + str(resp.status_code)
     else:
         print "GET request " + _url + _orders + " succesful"
-        mes_api.get_time(resp.status_code) 
+        resptime = mes_api.get_time(resp.status_code) 
+        print resptime
 
         # Create JSON object
         jsonObj = resp.json()
@@ -71,7 +73,8 @@ while True:
             print "Raised API Error on POST request. Status code " + str(rerr.status_code) + "\n"
         else:
             print "POST request indicating No-Order status to" + _url + " succesful"
-            mes_api.get_time(rerr.status_code)
+            rerrtime = mes_api.get_time(rerr.status_code)
+            print rerrtime
             mes_api.die(8)
 
     else:
@@ -83,12 +86,20 @@ while True:
         if r.status_code != 200:
             print "Raised API Error on PUT request. Status code " + str(r.status_code)
         else:
-            print "PUT request " + _url + _orders + " succesful"
-            mes_api.get_time(r.status_code)
+            succPut = "PUT request " + _url + _orders + " succesful"
+            print succPut
+            rtime = mes_api.get_time(r.status_code)
+            print rtime
 
+            # Get the ticket of the order
             ticket = mes_api.get_ticket(_id)
-           
-            print "Order " + str(_id) + " ticket: " + str(ticket) + "\n"
+            putSub = "Order " + str(_id) + " ticket: " + str(ticket)
+            print putSub
+
+            # Send email notification
+            hah = "Order taken and ready to be processed. \n" + "\n"
+            putBody = putSub +"\n" + "\n" + hah + rtime
+            feedback_api.mail_feedback(putSub, putBody)
 
             # Call GET method to see 
             r2 = mes_api.get_single(_url, _orders, _id)
@@ -96,7 +107,8 @@ while True:
                 print "Raised API Error on GET. Status code " + str(r2.status_code)
             else:
                 print "GET request " + _url + _orders + " succesful"
-                mes_api.get_time(r2.status_code)
+                r2time = mes_api.get_time(r2.status_code)
+                print r2time
 
                 # Call POST method to add new log entry on Order_Start
                 _idstr = str(_id)
@@ -106,8 +118,8 @@ while True:
                     print "Raised API Error on POST request. Status code " + str(r3.status_code)
                 else:
                     print "POST request " + _url + _orders + " succesful"
-                    mes_api.get_time(r3.status_code)
-
+                    r3time = mes_api.get_time(r3.status_code)
+                    print r3time
 
             #####     Order processing      #####
             print "Processing order..."
@@ -125,8 +137,15 @@ while True:
             if resp.status_code != 200:
                 print "Raised API Error on DELETE request. Status code " + str(resp.status_code)
             else:
-                print "DELETE request " + _url + _orders + " succesful"
-                mes_api.get_time(resp.status_code) 
+                succDel = "DELETE request " + _url + _orders + " succesful"
+                print succDel
+                deltime = mes_api.get_time(resp.status_code) 
+                print deltime
+
+                # Send email notification
+                lal = "Order " + str(_id) + " completed. \n \n Total score: \n" + str(mes_api.global_score) + " boxes. \n" + "\n"
+                delBody = succDel + "\n" + "\n" + lal + deltime
+                feedback_api.mail_feedback(putSub, delBody)                
 
                 # Log entry indicating deletion of the complete order
                 r4 = mes_api.post_log(_url, _log, cell_id, cmnt, events_dict[8])
@@ -134,7 +153,8 @@ while True:
                     print "Raised API Error on POST request. Status code " + str(r4.status_code)
                 else:
                     print "POST request " + _url + _orders + " succesful"
-                    mes_api.get_time(r4.status_code)
+                    r4time = mes_api.get_time(r4.status_code)
+                    print r4time
                     print "\n"
 
 

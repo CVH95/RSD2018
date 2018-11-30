@@ -426,3 +426,5 @@ link-local      *               255.255.0.0     U     1000   0        0 wlp2s0
  - [Flask-MySQL](https://flask-mysql.readthedocs.io/en/latest/) extension.
  - Creating a WebApp from scratch using Python Flask and MySQL [tutorial](https://code.tutsplus.com/es/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972).
  - [Simultaneous WiFi and Ethernet access](http://www.knight-of-pi.org/setup-simultanous-ethernet-and-wifi-access-for-the-raspberry-pi-3/) for Raspberry Pi.
+ - [Send emails](https://www.pythonforbeginners.com/code-snippets-source-code/using-python-to-send-email) with Python.
+ - Run bash script from desktop [icon](http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/desktop-shortcuts).
