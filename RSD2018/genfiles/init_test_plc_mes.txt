@@ -1,0 +1,27 @@
+$ python3 initia.py 169.254.162.41 192.168.100.92
+
+#########################################
+##  WORKCELL #3 SYSTEM INITIALIZATION  ##
+######################################### 
+
+Started MES WorkCell 3 manager on IP address: 192.168.100.92
+
+Tried GET request http://192.168.100.200/event_types succesful. 
+ 
+ System connected to the server (wlan0).
+
+On Fri Nov 30 22:51:47 2018 - Status code = 200
+
+ 
+ 
+ --------------------------------------------------------------------------- 
+ 
+
+Started MES WorkCell 3 manager on IP address: 169.254.162.41
+
+
+Connected to PLC's Server in http://169.254.112.197:5000/ (eth0)
+Sent hello 1,2,0
+Received Hello.
+Connection closed.
+System is ready to go!

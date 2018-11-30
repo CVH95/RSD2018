@@ -63,15 +63,18 @@ sock.connect(server_address)
 
 print("Connected to PLC's Server in http://" + server_address[0] + ":" + str(server_address[1]) + "/ (eth0)")
 
-data = '3'
+d = '1,2,0'
+data = d.encode()
 
 sock.send(data)
 
-print("Sent hello " + data)
+print("Sent hello " + d)
 
 while True:
     rcpt = sock.recv(1024)
     if rcpt != None:
+        rec = rcpt.decode()
+        print ("status: " + rec)
         print ("Received Hello.")
         break
     
