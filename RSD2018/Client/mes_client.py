@@ -69,6 +69,11 @@ while True:
     if _id == -1:
         cerr = "waiting - all orders taken"
         rerr = mes_api.post_log(_url, _log, cell_id, cerr, events_dict[0])
+        Msg = "No order is available at the moment. System is waiting. \n \n"
+        errSub = "WARNING! All orders taken!"
+        rerrtime = mes_api.get_time(rerr.status_code)
+        errMsg = Msg + rerrtime
+        feedback_api.mail_feedback(errSub, errMsg)
         if rerr.status_code != 200:
             print "Raised API Error on POST request. Status code " + str(rerr.status_code) + "\n"
         else:
