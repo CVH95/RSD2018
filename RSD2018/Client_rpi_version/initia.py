@@ -42,7 +42,7 @@ else:
     succtime = mes_api.get_time(resp.status_code)
     succBody = _own + succ + succtime
     #feedback_api.mail_feedback(respSub, succBody)
-    print succBody
+    print (succBody)
     fi.write("Connected to MES Server \n")
     
 
