@@ -387,7 +387,11 @@ link-local      *               255.255.0.0     U     1000   0        0 wlp2s0
 192.168.1.0     *               255.255.255.0   U     600    0        0 wlp2s0
 ```
 
-## 5. Debugging
+## 5. Real Operation Running
+
+Disabled email functionality because RSD MES master network does not allow internet connection.
+
+## 6. Debugging
 
 - **Create jobs execution bug:**
 

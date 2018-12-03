@@ -17,7 +17,10 @@ _arg = sys.argv[1]
 _ipOwn = str(_arg)
 
 # Define url and paths
-_url = 'http://192.168.1.100:5000'
+#_host = 'localhost'
+_host = '192.168.100.200'
+#_url = 'http://' + _host + ':5000' # Debug
+_url = 'http://' + _host
 _events = '/event_types'
 
 # Define output file
@@ -38,9 +41,12 @@ else:
     succ = "Tried GET request " + _url + _events + " succesful. \n \n System connected to the server." + "\n" + "\n"
     succtime = mes_api.get_time(resp.status_code)
     succBody = _own + succ + succtime
-    feedback_api.mail_feedback(respSub, succBody)
+    #feedback_api.mail_feedback(respSub, succBody)
+    print succBody
     fi.write("Connected to MES Server \n")
     
+
+print (" \n \n --------------------------------------------------------------------------- \n \n")
 
 # PLC test
     

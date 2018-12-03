@@ -46,11 +46,12 @@ def die(secs):
     time.sleep(secs)
 
 # Get ticket from database
-def get_ticket(_id):
+def get_ticket(_id, _host):
     # Connect to database
-    conn = pymysql.connect(host='localhost',
-                           user='rsd',
-                           password='rsd2018',
+    # On localhost use utf8 charset
+    conn = pymysql.connect(host=_host,
+                           user='mirex',
+                           password='robot2018',
                            db='rsd2018',
                            charset='utf8',
                            cursorclass=pymysql.cursors.DictCursor)
@@ -78,10 +79,12 @@ def post_log(_url, path, cid, cmnt, evt):
     return requests.post(pst_url, json=log)
 
 # Delete an order (DELETE)
-def delete_order(_url, path, d):
-    _idd = '/' + str(d)
+def delete_order(_url, path, id, ticket):
+    body = {"ticket":ticket}
+    _idd = '/' + str(id)
     d_url = _url + path + _idd
-    return requests.delete(d_url)
+    return requests.delete(d_url, json=body)
+
 
 # PLC communication during the processing of the order
 def plc_control(_plc, events, _url, _path, cid, cmt):

@@ -12,7 +12,10 @@ print "##  WORKCELL #3 ONLINE MANAGER  ##"
 print "################################## \n"
 
 # Define url and paths
-_url = 'http://localhost:5000'
+#_host = 'localhost' # Debug
+_host = '192.168.100.200'
+#_url = 'http://' + _host + ':5000'
+_url = 'http://' + _host
 _log = '/log'
 _orders = '/orders'
 _events = '/event_types'
@@ -73,11 +76,12 @@ while True:
         errSub = "WARNING! All orders taken!"
         rerrtime = mes_api.get_time(rerr.status_code)
         errMsg = Msg + rerrtime
-        feedback_api.mail_feedback(errSub, errMsg)
+        print errMsg
+        #feedback_api.mail_feedback(errSub, errMsg)
         if rerr.status_code != 200:
             print "Raised API Error on POST request. Status code " + str(rerr.status_code) + "\n"
         else:
-            print "POST request indicating No-Order status to" + _url + " succesful"
+            print "POST request indicating No-Order status to " + _url + " succesful"
             rerrtime = mes_api.get_time(rerr.status_code)
             print rerrtime
             mes_api.die(8)
@@ -97,14 +101,16 @@ while True:
             print rtime
 
             # Get the ticket of the order
-            ticket = mes_api.get_ticket(_id)
+            jsonPUT = r.json()
+            ticket = jsonPUT['ticket']
             putSub = "Order " + str(_id) + " ticket: " + str(ticket)
             print putSub
 
             # Send email notification
             hah = "Order taken and ready to be processed. \n" + "\n"
             putBody = putSub +"\n" + "\n" + hah + rtime
-            feedback_api.mail_feedback(putSub, putBody)
+            print putBody
+            #feedback_api.mail_feedback(putSub, putBody)
 
             # Call GET method to see 
             r2 = mes_api.get_single(_url, _orders, _id)
@@ -117,19 +123,19 @@ while True:
 
                 # Call POST method to add new log entry on Order_Start
                 _idstr = str(_id)
-                cmnt = str(ticket)
+                cmnt = _idstr + ", " + str(ticket)
                 r3 = mes_api.post_log(_url, _log, cell_id, cmnt, events_dict[7])
                 if r3.status_code != 200:
                     print "Raised API Error on POST request. Status code " + str(r3.status_code)
                 else:
-                    print "POST request " + _url + _orders + " succesful"
+                    print "POST request " + _url + _log + " succesful"
                     r3time = mes_api.get_time(r3.status_code)
                     print r3time
 
             #####     Order processing      #####
-            print "Processing order..."
-            mes_api.die(5)
-            mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
+            print "Processing order... \n"
+            mes_api.die(25)
+            #mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
 
 
             ##### PackML related code here  #####
@@ -138,9 +144,9 @@ while True:
             ##########################################################################
             # 3. DELETE ORDER -- Call DELETE method to erase completed order from DB #
             ##########################################################################
-            resp = mes_api.delete_order(_url, _orders, _id)
+            resp = mes_api.delete_order(_url, _orders, _id, ticket)
             if resp.status_code != 200:
-                print "Raised API Error on DELETE request. Status code " + str(resp.status_code)
+                print "Raised API Error on DELETE request. Status code " + str(resp.status_code) + "\n \n \n"
             else:
                 succDel = "DELETE request " + _url + _orders + " succesful"
                 print succDel
@@ -150,17 +156,18 @@ while True:
                 # Send email notification
                 lal = "Order " + str(_id) + " completed. \n \n Total score: \n" + str(mes_api.global_score) + " boxes. \n" + "\n"
                 delBody = succDel + "\n" + "\n" + lal + deltime
-                feedback_api.mail_feedback(putSub, delBody)                
+                print delBody
+                #feedback_api.mail_feedback(putSub, delBody)                
 
-                # Log entry indicating deletion of the complete order
+                # POST Log entry indicating deletion of the complete order
                 r4 = mes_api.post_log(_url, _log, cell_id, cmnt, events_dict[8])
                 if r4.status_code != 200:
                     print "Raised API Error on POST request. Status code " + str(r4.status_code)
                 else:
-                    print "POST request " + _url + _orders + " succesful"
+                    print "POST request " + _url + _log + " succesful"
                     r4time = mes_api.get_time(r4.status_code)
                     print r4time
-                    print "\n"
+                    print "\n \n \n \n"
 
 
 # Never ending loop

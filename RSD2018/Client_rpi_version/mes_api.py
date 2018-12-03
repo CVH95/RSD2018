@@ -78,10 +78,11 @@ def post_log(_url, path, cid, cmnt, evt):
     return requests.post(pst_url, json=log)
 
 # Delete an order (DELETE)
-def delete_order(_url, path, d):
-    _idd = '/' + str(d)
+def delete_order(_url, path, id, ticket):
+    body = {"ticket":ticket}
+    _idd = '/' + str(id)
     d_url = _url + path + _idd
-    return requests.delete(d_url)
+    return requests.delete(d_url, json=body)
 
 # PLC communication during the processing of the order
 def plc_control(_plc, events, _url, _path, cid, cmt):
