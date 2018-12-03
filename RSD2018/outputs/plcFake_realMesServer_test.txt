@@ -1,0 +1,37 @@
+$ ./run_plc.sh 
+
+PLC running TCP/IP Server on http://localhost:30000/
+Accepted connection from 127.0.0.1:39924
+Order: [1, 2, 0, 711]
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Server shut down
+PLC running TCP/IP Server on http://localhost:30000/
+Accepted connection from 127.0.0.1:39944
+Order: [1, 1, 1, 712]
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Server shut down
+PLC running TCP/IP Server on http://localhost:30000/
+Accepted connection from 127.0.0.1:39970
+Order: [1, 1, 0, 713]
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Server shut down
+PLC running TCP/IP Server on http://localhost:30000/
+Accepted connection from 127.0.0.1:39994
+Order: [2, 1, 1, 714]
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Server shut down

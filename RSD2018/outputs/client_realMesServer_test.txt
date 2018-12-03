@@ -1,0 +1,362 @@
+$ python mes_client.py 
+
+##################################
+##  WORKCELL #3 ONLINE MANAGER  ##
+################################## 
+
+Connecting to server on http://192.168.100.200 and waiting for new jobs 
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:26 2018 - Status code = 200
+
+Taking order #711
+Updated order with id: 711
+Preparing LEGO bricks:
+  >> Blue: 1
+  >> Red: 2
+  >> Yellow: 0
+
+
+PUT request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:26 2018 - Status code = 200
+
+Order 711 ticket: 407937
+Order 711 ticket: 407937
+
+Order taken and ready to be processed. 
+
+On Mon Dec  3 15:30:26 2018 - Status code = 200
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:26 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: 711, 407937
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:30:26 2018 - Status code = 200
+
+Processing order... 
+
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Suspended
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Suspended
+  >> cmnt: 711, 407937
+Server's reply:
+PackML state update: PML_Idle
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Idle
+  >> cmnt: 711, 407937
+Server's reply:
+PackML state update: PML_Complete
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Complete
+  >> cmnt: 711, 407937
+Connection closed.
+DELETE request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+DELETE request http://192.168.100.200/orders succesful
+
+Order 711 completed. 
+ 
+ Total score: 
+1 boxes. 
+
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: 711, 407937
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+
+ 
+ 
+ 
+
+Connecting to server on http://192.168.100.200 and waiting for new jobs 
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+Taking order #712
+Updated order with id: 712
+Preparing LEGO bricks:
+  >> Blue: 1
+  >> Red: 1
+  >> Yellow: 1
+
+
+PUT request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+Order 712 ticket: 0A7E3F
+Order 712 ticket: 0A7E3F
+
+Order taken and ready to be processed. 
+
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: 712, 0A7E3F
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:30:39 2018 - Status code = 200
+
+Processing order... 
+
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Stopped
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Stopped
+  >> cmnt: 712, 0A7E3F
+Server's reply:
+PackML state update: PML_Suspended
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Suspended
+  >> cmnt: 712, 0A7E3F
+Server's reply:
+PackML state update: PML_Complete
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Complete
+  >> cmnt: 712, 0A7E3F
+Server's reply:
+PackML state update: PML_Complete
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Complete
+  >> cmnt: 712, 0A7E3F
+Server's reply:
+PackML state update: PML_Aborted
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Aborted
+  >> cmnt: 712, 0A7E3F
+Server's reply:
+PackML state update: PML_Stopped
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Stopped
+  >> cmnt: 712, 0A7E3F
+Connection closed.
+DELETE request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+DELETE request http://192.168.100.200/orders succesful
+
+Order 712 completed. 
+ 
+ Total score: 
+2 boxes. 
+
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: 712, 0A7E3F
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+
+ 
+ 
+ 
+
+Connecting to server on http://192.168.100.200 and waiting for new jobs 
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+Taking order #713
+Updated order with id: 713
+Preparing LEGO bricks:
+  >> Blue: 1
+  >> Red: 1
+  >> Yellow: 0
+
+
+PUT request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+Order 713 ticket: EEB89B
+Order 713 ticket: EEB89B
+
+Order taken and ready to be processed. 
+
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: 713, EEB89B
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:31:01 2018 - Status code = 200
+
+Processing order... 
+
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Complete
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Complete
+  >> cmnt: 713, EEB89B
+Server's reply:
+PackML state update: PML_Suspended
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Suspended
+  >> cmnt: 713, EEB89B
+Server's reply:
+PackML state update: PML_Execute
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Execute
+  >> cmnt: 713, EEB89B
+Server's reply:
+PackML state update: PML_Complete
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Complete
+  >> cmnt: 713, EEB89B
+Server's reply:
+PackML state update: PML_Held
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Held
+  >> cmnt: 713, EEB89B
+Connection closed.
+DELETE request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+DELETE request http://192.168.100.200/orders succesful
+
+Order 713 completed. 
+ 
+ Total score: 
+3 boxes. 
+
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: 713, EEB89B
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+
+ 
+ 
+ 
+
+Connecting to server on http://192.168.100.200 and waiting for new jobs 
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+Taking order #714
+Updated order with id: 714
+Preparing LEGO bricks:
+  >> Blue: 2
+  >> Red: 1
+  >> Yellow: 1
+
+
+PUT request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+Order 714 ticket: 391678
+Order 714 ticket: 391678
+
+Order taken and ready to be processed. 
+
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+GET request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:20 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Start
+  >> cmnt: 714, 391678
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:31:21 2018 - Status code = 200
+
+Processing order... 
+
+Connected to PLC's Server in http://localhost:30000/
+Sent order to PLC
+Server's reply:
+PackML state update: PML_Held
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Held
+  >> cmnt: 714, 391678
+Server's reply:
+PackML state update: PML_Stopped
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Stopped
+  >> cmnt: 714, 391678
+Server's reply:
+PackML state update: PML_Held
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Held
+  >> cmnt: 714, 391678
+Server's reply:
+PackML state update: PML_Execute
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Execute
+  >> cmnt: 714, 391678
+Server's reply:
+PackML state update: PML_Stopped
+Posted new log entry:
+  >> cell_id: 3
+  >> event: PML_Stopped
+  >> cmnt: 714, 391678
+Connection closed.
+DELETE request http://192.168.100.200/orders succesful
+On Mon Dec  3 15:31:40 2018 - Status code = 200
+
+DELETE request http://192.168.100.200/orders succesful
+
+Order 714 completed. 
+ 
+ Total score: 
+4 boxes. 
+
+On Mon Dec  3 15:31:40 2018 - Status code = 200
+
+Posted new log entry:
+  >> cell_id: 3
+  >> event: Order_Done
+  >> cmnt: 714, 391678
+POST request http://192.168.100.200/log succesful
+On Mon Dec  3 15:31:40 2018 - Status code = 200

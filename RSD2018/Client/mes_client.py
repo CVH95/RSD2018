@@ -134,8 +134,8 @@ while True:
 
             #####     Order processing      #####
             print "Processing order... \n"
-            mes_api.die(25)
-            #mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
+            mes_api.die(4)
+            mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
 
 
             ##### PackML related code here  #####
