@@ -12,13 +12,16 @@ print "##  WORKCELL #3 ONLINE MANAGER  ##"
 print "################################## \n"
 
 # Define url and paths
+
 #_host = 'localhost' # Debug
-_host = '192.168.100.200'
 #_url = 'http://' + _host + ':5000'
+_host = '192.168.100.200'
 _url = 'http://' + _host
 _log = '/log'
 _orders = '/orders'
 _events = '/event_types'
+_plc_add = '169.254.112.197'
+_plc_port = 5000
 
 # Define global variables
 cell_id = 3
@@ -134,8 +137,8 @@ while True:
 
             #####     Order processing      #####
             print "Processing order... \n"
-            mes_api.die(4)
-            mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
+            mes_api.die(2)
+            mes_api.plc_control(_plc_add, _plc_port, _plc, events_dict, _url, _log, cell_id, cmnt)
 
 
             ##### PackML related code here  #####

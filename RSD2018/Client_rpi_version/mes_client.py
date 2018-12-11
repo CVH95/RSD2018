@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import mes_api
+import socket
 import feedback_api
 
 # Robot System Design 2018 - SDU
@@ -12,13 +13,26 @@ print ("##  WORKCELL #3 ONLINE MANAGER  ##")
 print ("################################## \n")
 
 # Define url and paths
+
+# MES
+
 #_host = 'localhost' # Debug
-_host = '192.168.100.200'
 #_url = 'http://localhost:5000' # Debug
+_host = '192.168.100.200'
 _url = 'http://' + _host
 _log = '/log'
 _orders = '/orders'
 _events = '/event_types'
+
+# PLC
+_plc_addr = '169.254.112.197'
+_plc_port = 5000
+
+# Create a TCP/IP socket client connected to PLC's server
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_address = (_plc_addr, _plc_port)
+sock.connect(server_address)
+
 
 # Define global variables
 cell_id = 3
@@ -135,7 +149,7 @@ while True:
             #####     Order processing      #####
             print ("Processing order... \n")
             mes_api.die(15)
-            #mes_api.plc_control(_plc, events_dict, _url, _log, cell_id, cmnt)
+            #mes_api.plc_control(sock, events_dict, _url, _log, cell_id, cmnt)
 
 
             ##### PackML related code here  #####

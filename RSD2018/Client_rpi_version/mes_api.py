@@ -85,31 +85,64 @@ def delete_order(_url, path, id, ticket):
     return requests.delete(d_url, json=body)
 
 # PLC communication during the processing of the order
-def plc_control(_plc, events, _url, _path, cid, cmt):
+def plc_control(sock, _plc, events, _url, _path, cid, cmt):
+    
+    # Instance to global score
     global global_score
-    # Create a TCP/IP socket client connected to PLC's server
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ('localhost', 30000)
-    sock.connect(server_address)
 
-    print ("Connected to PLC's Server in http://" + server_address[0] + ":" + str(server_address[1]) + "/")
+    print ("Connected to PLC's Server")# in http://" + server_address[0] + ":" + str(server_address[1]) + "/")
 
-    data = str(_plc)
+    hello = '11'
+    h = hello.encode()
+    sock.send(h)
 
+    print ("Sent hello message")
+
+    # Wait for the PLC to ask for orders
+    while True:
+        qa = sock.recv(1024)
+        q = qa.decode()
+        if q == 'new':
+            print ("Received PLC request. Sending data")
+            break
+        else:
+            print ("Received wronf request from PLC.")
+
+    # Prepair data
+    d = str(_plc[0]) + ',' + str(_plc[1]) + ',' + str(_plc[2]) 
+    data = d.encode()
+
+    # Send data
     sock.send(data)
     print ("Sent order to PLC")
 
+    # Listen to updates in the system status. Wait until order is complete and PLC sends PML_Complete
     while True:
-        rcpt = sock.recv(1024)
-        _state = int(rcpt)
-        if _state == 9:
-            global_score = global_score + 1
-            break
+        rs = sock.recv(1024)
+        rec = rs.decode()
+        if rec == 'ok':
+            print ("Server's reply: " + rec)
+            print ("The server received the order correctly")
+            while True:
+                rcpt = sock.recv(1024)
+                _state = rcpt.decode()
+                if _state == 2:
+                    print ("Server's reply:")
+                    print ("PackML state update: " + events[_state])
+                    global_score = global_score + 1
+                    break
+                else:
+                    print ("Server's reply:")
+                    print ("PackML state update: " + events[_state])
+                    evt = events[_state]
+                    post_log(_url, _path, cid, cmt, evt)
+                    
+                break
+            
         else:
-            print ("Server's reply:")
-            print ("PackML state update: " + events[_state])
-            evt = events[_state]
-            post_log(_url, _path, cid, cmt, evt)
-    
-    sock.close()
-    print ("Connection closed.")
+            print ("Server's reply: " + rec)
+            print ("An error ocurred while sending the order. Re-sending...")
+            plc_control(sock, _plc, events, _url, _path, cid, cmt)
+                
+    #sock.close()
+    #print ("Connection closed.")
