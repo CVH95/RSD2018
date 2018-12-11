@@ -92,7 +92,7 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
 
     print ("Connected to PLC's Server")# in http://" + server_address[0] + ":" + str(server_address[1]) + "/")
 
-    hello = '11'
+    hello = 'hi'
     h = hello.encode()
     sock.send(h)
 
@@ -103,7 +103,8 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
         qa = sock.recv(1024)
         q = qa.decode()
         if q == 'new':
-            print ("Received PLC request. Sending data")
+            print ("Received PLC request: " + str(q))
+            print ("Sending data.")
             break
         else:
             print ("Received wronf request from PLC.")
@@ -114,33 +115,33 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
 
     # Send data
     sock.send(data)
-    print ("Sent order to PLC")
+    print ("Sent order data to PLC.")
 
     # Listen to updates in the system status. Wait until order is complete and PLC sends PML_Complete
     while True:
         rs = sock.recv(1024)
         rec = rs.decode()
-        if rec == 'ok':
-            print ("Server's reply: " + rec)
+        if str(rec) == 'ok':
+            print ("Server's reply: " + str(rec))
             print ("The server received the order correctly")
             while True:
                 rcpt = sock.recv(1024)
                 _state = rcpt.decode()
-                if _state == 2:
-                    print ("Server's reply:")
-                    print ("PackML state update: " + events[_state])
+                if int(_state) == 2:
+                    print ("Server's reply: " + _state)
+                    print ("PackML state update: " + events[int(_state)])
                     global_score = global_score + 1
                     break
                 else:
-                    print ("Server's reply:")
-                    print ("PackML state update: " + events[_state])
-                    evt = events[_state]
-                    post_log(_url, _path, cid, cmt, evt)
+                    print ("Server's reply: " + _state)
+                    print ("PackML state update: " + events[int(_state)])
+                    #evt = events[_state]
+                    #post_log(_url, _path, cid, cmt, evt)
                     
-                break
+            break
             
         else:
-            print ("Server's reply: " + rec)
+            print ("Server's reply: " + str(rec))
             print ("An error ocurred while sending the order. Re-sending...")
             plc_control(sock, _plc, events, _url, _path, cid, cmt)
                 

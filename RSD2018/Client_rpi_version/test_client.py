@@ -55,7 +55,7 @@ while True:
                 _id = jsonObj['orders'][i]['id']
                 # Array that will be sent to the PLC
                 _plc = [jsonObj['orders'][i]['blue'], jsonObj['orders'][i]['red'], jsonObj['orders'][i]['yellow'], _id]
-                print ("Taking order #" + str(_id)))
+                print ("Taking order #" + str(_id))
                 print ("Updated order with id: " + str(_id))
                 print ("Preparing LEGO bricks:")
                 print ("  >> Blue: " + str(jsonObj['orders'][i]['blue']))
