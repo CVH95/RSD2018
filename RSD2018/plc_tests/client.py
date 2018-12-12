@@ -1,9 +1,12 @@
+import sys
 import api
 import socket
 
 # PLC
-_ip = 'localhost'
+_ip = str(sys.argv[1])
 _port = 5000
+
+print ("Server's IP: " + _ip)
 
 # Define global variables
 cell_id = 3
