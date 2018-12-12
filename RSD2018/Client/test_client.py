@@ -15,8 +15,8 @@ _orders = '/orders'
 _events = '/event_types'
 
 # PLC
-_ip = 'localhost'
-_port = 30000
+_ip = '169.254.112.197'
+_port = 5000
 
 # Define global variables
 cell_id = 3
@@ -85,9 +85,11 @@ while True:
 
     # Connect to PLC and send order
     else:
-        cmt = "is a test"
+        print (" #### CONNECTED TO PLC SERVER #### \n \n \n")
+        print ("Connecting to PLC Server in http://" + _ip + ":" + str(_port) + "/")
         mes_api.plc_control(sock, _plc, events_dict, _url, _log, cell_id, cmt)
-        print "Going back to the begining of the loop"
+        print ("Order was completed succesfully. ")
+        print ("Total orders completed: " + str(api.global_score))
         tii = mes_api.get_time(911)
         print tii + "\n \n \n"
 

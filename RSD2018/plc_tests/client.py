@@ -3,10 +3,14 @@ import api
 import socket
 
 # PLC
-_ip = str(sys.argv[1])
-_port = 5000
+#_ip = str(sys.argv[1])
+_ip = '169.254.112.197'
+_port = 6000
 
-print ("Server's IP: " + _ip)
+cid = 3
+_WC = api.manager(cid)
+
+print ("Server's IP: " + _ip + "\n")
 
 # Define global variables
 cell_id = 3

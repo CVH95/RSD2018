@@ -9,18 +9,31 @@ import sys
 # REST API Client of the project's MES System
 # Group 3: Carlos, Caroline, Daniel.
 
+print("\n")
 print ("##################################")
 print ("##  WORKCELL #3 ONLINE MANAGER  ##")
 print ("################################## \n")
 
-#argv1 = sys.argv[1]
-#argv2 = sys.argv[2]
-#_ip_wlan0 = str(argv2)
-#_ip_eth0 = str(argv1)
+argv1 = sys.argv[1]
+argv2 = sys.argv[2]
+_ip_wlan0 = str(argv2)
+_ip_eth0 = str(argv1)
 
-#print ("MES client running on wlan0 with IP: " + _ip_wlan0)
-#print ("PLC client running on eth0 with IP: " + _ip_eth0)
+print ("MES client running on wlan0 with IP: " + _ip_wlan0)
+print ("PLC client running on eth0 with IP: " + _ip_eth0)
 
+# Define global variables
+cell_id = 3
+events_dict = {0:'PML_Idle', 1:'PML_Execute', 2:'PML_Complete', 3:'PML_Held', 4:'PML_Suspended', 5:'PML_Aborted', 6:'PML_Stopped', 7:'Order_Start', 8:'Order_Done'}
+mes_api._nCycles = 0
+mes_api.global_score = 0
+_init_time = mes_api.get_time(23)
+
+file = open("start_time.txt", "w")
+file.write("The system was started " + _init_time)
+file.close()
+
+_wc = mes_api.manager(cell_id)
 
 # Define url and paths
 
@@ -36,24 +49,18 @@ _events = '/event_types'
 
 # PLC
 _plc_addr = '169.254.112.197'
-_plc_port = 5000
+_plc_port = 6000
 
 # Create a TCP/IP socket client connected to PLC's server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = (_plc_addr, _plc_port)
 sock.connect(server_address)
 
-
-# Define global variables
-cell_id = 3
-events_dict = {0:'PML_Idle', 1:'PML_Execute', 2:'PML_Complete', 3:'PML_Held', 4:'PML_Suspended', 5:'PML_Aborted', 6:'PML_Stopped', 7:'Order_Start', 8:'Order_Done'}
-mes_api.global_score = 0
-
 #mysql = MySQL()
 
 while True:
 
-    print ("Connecting to server on " + _url + " and waiting for new jobs \n")
+    print ("Connecting to server on " + _url + " and waiting for an order \n")
     
     ##################################################################
     # 1. SEE ORDERS -- Call GET method to see list of available jobs #
@@ -100,6 +107,7 @@ while True:
         errSub = "WARNING! All orders taken!"
         rerrtime = mes_api.get_time(rerr.status_code)
         errMsg = Msg + rerrtime
+        mes_api._nCycles = mes_api._nCycles + 1
         #feedback_api.mail_feedback(errSub, errMsg)
         print (errMsg)
         if rerr.status_code != 200:
@@ -157,12 +165,20 @@ while True:
                     print (r3time)
 
             #####     Order processing      #####
+                    
             print ("Processing order... \n")
-            mes_api.die(15)
-            #mes_api.plc_control(sock, events_dict, _url, _log, cell_id, cmnt)
+            #mes_api.die(15)
+            #mes_api.global_score = mes_api.global_score + 1
+            print (" #### CONNECTING TO PLC SERVER #### \n \n \n")
+            print ("Connecting to PLC Server in http://" + _plc_addr + ":" + str(_plc_port) + "/")
+            cmnt = str(_id) + ", " + str(ticket)
+            mes_api.plc_control(sock, _plc, events_dict, _url, _log, cell_id, cmnt) 
+            print ("Order was completed succesfully. ")
+            print ("Total orders completed: " + str(api.global_score))
+            tii = mes_api.get_time(911)
+            print (tii + "\n \n \n")
 
-
-            ##### PackML related code here  #####
+            ##### Order processing code above  #####
 
             
             ##########################################################################
@@ -191,7 +207,10 @@ while True:
                     print ("POST request " + _url + _log + " succesful")
                     r4time = mes_api.get_time(r4.status_code)
                     print (r4time)
+                    mes_api._nCycles = mes_api._nCycles + 1
+                    print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
                     print ("\n \n \n")
+                    
 
 
 # Never ending loop
