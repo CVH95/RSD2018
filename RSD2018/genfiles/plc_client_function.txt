@@ -1,0 +1,134 @@
+$ python3 client.py 192.168.100.107
+
+Server's IP: 192.168.100.107
+
+ #### CONNECTED TO PLC SERVER #### 
+ 
+ 
+
+Connecting to PLC Server in http://192.168.100.107:5000/
+Connected to PLC's Server
+Sent hello message
+Received PLC request: new
+Sending data.
+Sent order data to PLC.
+Server's reply: ok
+The server received the order correctly
+Server's reply: 0
+PackML state update: PML_Idle
+Server's reply: 3
+PackML state update: PML_Held
+Server's reply: 2
+PackML state update: PML_Complete
+Order was completed succesfully. 
+Total orders completed: 1
+Rebboting the cycle...
+
+ 
+ 
+
+ #### CONNECTED TO PLC SERVER #### 
+ 
+ 
+
+Connecting to PLC Server in http://192.168.100.107:5000/
+Connected to PLC's Server
+Sent hello message
+Received PLC request: new
+Sending data.
+Sent order data to PLC.
+Server's reply: ok
+The server received the order correctly
+Server's reply: 6
+PackML state update: PML_Stopped
+Server's reply: 1
+PackML state update: PML_Execute
+Server's reply: 6
+PackML state update: PML_Stopped
+Server's reply: 1
+PackML state update: PML_Execute
+Server's reply: 2
+PackML state update: PML_Complete
+Order was completed succesfully. 
+Total orders completed: 2
+Rebboting the cycle...
+
+ 
+ 
+
+ #### CONNECTED TO PLC SERVER #### 
+ 
+ 
+
+Connecting to PLC Server in http://192.168.100.107:5000/
+Connected to PLC's Server
+Sent hello message
+Received PLC request: new
+Sending data.
+Sent order data to PLC.
+Server's reply: ok
+The server received the order correctly
+Server's reply: 3
+PackML state update: PML_Held
+Server's reply: 1
+PackML state update: PML_Execute
+Server's reply: 4
+PackML state update: PML_Suspended
+Server's reply: 3
+PackML state update: PML_Held
+Server's reply: 0
+PackML state update: PML_Idle
+Server's reply: 2
+PackML state update: PML_Complete
+Order was completed succesfully. 
+Total orders completed: 3
+Rebboting the cycle...
+
+ 
+ 
+
+ #### CONNECTED TO PLC SERVER #### 
+ 
+ 
+
+Connecting to PLC Server in http://192.168.100.107:5000/
+Connected to PLC's Server
+Sent hello message
+Received PLC request: new
+Sending data.
+Sent order data to PLC.
+Server's reply: ok
+The server received the order correctly
+Server's reply: 3
+PackML state update: PML_Held
+Server's reply: 6
+PackML state update: PML_Stopped
+Server's reply: 3
+PackML state update: PML_Held
+Server's reply: 6
+PackML state update: PML_Stopped
+Server's reply: 2
+PackML state update: PML_Complete
+Order was completed succesfully. 
+Total orders completed: 4
+Rebboting the cycle...
+
+ 
+ 
+
+ #### CONNECTED TO PLC SERVER #### 
+ 
+ 
+
+Connecting to PLC Server in http://192.168.100.107:5000/
+Connected to PLC's Server
+Sent hello message
+Received PLC request: new
+Sending data.
+Sent order data to PLC.
+Server's reply: ok
+The server received the order correctly
+Server's reply: 4
+PackML state update: PML_Suspended
+Server's reply: 4
+PackML state update: PML_Suspended

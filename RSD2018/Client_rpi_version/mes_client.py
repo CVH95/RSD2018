@@ -3,6 +3,7 @@
 import mes_api
 import socket
 import feedback_api
+import sys
 
 # Robot System Design 2018 - SDU
 # REST API Client of the project's MES System
@@ -11,6 +12,15 @@ import feedback_api
 print ("##################################")
 print ("##  WORKCELL #3 ONLINE MANAGER  ##")
 print ("################################## \n")
+
+#argv1 = sys.argv[1]
+#argv2 = sys.argv[2]
+#_ip_wlan0 = str(argv2)
+#_ip_eth0 = str(argv1)
+
+#print ("MES client running on wlan0 with IP: " + _ip_wlan0)
+#print ("PLC client running on eth0 with IP: " + _ip_eth0)
+
 
 # Define url and paths
 

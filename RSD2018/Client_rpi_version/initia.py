@@ -14,20 +14,32 @@ print ("##  WORKCELL #3 SYSTEM INITIALIZATION  ##")
 print ("######################################### \n")
 
 #Get args
-_arg = sys.argv[1]
-_arg2 = sys.argv[2]
-_ipOwn = str(_arg2)
-_ipETH = str(_arg)
+argv1 = sys.argv[1]
+argv2 = sys.argv[2]
+_ip_wlan0 = str(argv2)
+_ip_eth0 = str(argv1)
+
+print ("MES client running on wlan0 with IP: " + _ip_wlan0)
+print ("PLC client running on eth0 with IP: " + _ip_eth0)
+
+print (" \n \n --------------------------------------------------------------------------- \n \n")
 
 # Define url and paths
+
+# Develop mode
 #_host = 'localhost'
-_host = '192.168.100.200'
 #_url = 'http://' + _host + ':5000' # Debug
+
+# MES system
+_host = '192.168.100.200'
 _url = 'http://' + _host
 _events = '/event_types'
 
-# Define output file
-#fi = open("../genfiles/conn_status.txt", "w")
+# PLC
+_ip_PLC = '169.254.112.197'
+_port_PLC = 5000
+
+print ("Testing connection to RSD MES master \n")
 
 # MES test
 resp = mes_api.get_events(_url, _events)
@@ -53,12 +65,12 @@ print (" \n \n -----------------------------------------------------------------
 
 # PLC test
 
-print("Started MES WorkCell 3 manager on IP address: " + _ipETH + "\n" + "\n")
+print ("Testing connection to PLC's server \n")
 
 # Create socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Connect the socket to the port where the server is listening
-server_address = ('169.254.112.197', 5000)
+server_address = (_ip_PLC, _port_PLC)
 sock.connect(server_address)
 
 print("Connected to PLC's Server in http://" + server_address[0] + ":" + str(server_address[1]) + "/ (eth0)")

@@ -1,0 +1,68 @@
+$ python3 plc_fake_server.py 192.168.100.107
+
+PLC running TCP/IP Server on http://192.168.100.107:5000/
+Accepted connection from 192.168.100.92:53886
+Received hello message: b'hi'
+Sent: new
+Accepted connection from 192.168.100.92:53886
+Order: 2,1,0
+Sent ok
+Number of rounds = 2
+Sending PackML state upadate.
+Sending PackML state upadate.
+Back to start 
+ 
+
+Accepted connection from 192.168.100.92:53886
+Received hello message: b'hi'
+Sent: new
+Accepted connection from 192.168.100.92:53886
+Order: 2,1,0
+Sent ok
+Number of rounds = 4
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Back to start 
+ 
+
+Accepted connection from 192.168.100.92:53886
+Received hello message: b'hi'
+Sent: new
+Accepted connection from 192.168.100.92:53886
+Order: 2,1,0
+Sent ok
+Number of rounds = 5
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Back to start 
+ 
+
+Accepted connection from 192.168.100.92:53886
+Received hello message: b'hi'
+Sent: new
+Accepted connection from 192.168.100.92:53886
+Order: 2,1,0
+Sent ok
+Number of rounds = 4
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
+Back to start 
+ 
+
+Accepted connection from 192.168.100.92:53886
+Received hello message: b'hi'
+Sent: new
+Accepted connection from 192.168.100.92:53886
+Order: 2,1,0
+Sent ok
+Number of rounds = 3
+Sending PackML state upadate.
+Sending PackML state upadate.
+Sending PackML state upadate.
