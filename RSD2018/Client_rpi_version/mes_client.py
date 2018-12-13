@@ -15,12 +15,12 @@ print ("##  WORKCELL #3 ONLINE MANAGER  ##")
 print ("################################## \n")
 
 argv1 = sys.argv[1]
-argv2 = sys.argv[2]
-_ip_wlan0 = str(argv2)
+#argv2 = sys.argv[2]
+#_ip_wlan0 = str(argv2)
 _ip_eth0 = str(argv1)
 
-print ("MES client running on wlan0 with IP: " + _ip_wlan0)
-print ("PLC client running on eth0 with IP: " + _ip_eth0)
+#print ("MES client running on wlan0 with IP: " + _ip_wlan0)
+#print ("PLC client running on eth0 with IP: " + _ip_eth0)
 
 # Define global variables
 cell_id = 3
@@ -41,6 +41,8 @@ _wc = mes_api.manager(cell_id)
 
 #_host = 'localhost' # Debug
 #_url = 'http://localhost:5000' # Debug
+_plc_addr = _ip_eth0
+
 _host = '192.168.100.200'
 _url = 'http://' + _host
 _log = '/log'
@@ -48,7 +50,7 @@ _orders = '/orders'
 _events = '/event_types'
 
 # PLC
-_plc_addr = '169.254.112.197'
+#_plc_addr = '169.254.112.197'
 _plc_port = 6000
 
 # Create a TCP/IP socket client connected to PLC's server
@@ -60,6 +62,25 @@ sock.connect(server_address)
 
 while True:
 
+    print ("Status: CONNECTED on eth0.")
+
+    hello = 'hi'
+    h = hello.encode()
+    sock.send(h)
+
+    print ("Sent hello message")
+
+    # Wait for the PLC to ask for orders
+    while True:
+        qa = sock.recv(1024)
+        q = qa.decode()
+        if str(q) == 'new':
+            print ("Received PLC order request: " + str(q))
+            break
+
+        else:
+            print ("Received update on WorkCell status from PLC: " + str(q))
+            
     print ("Connecting to server on " + _url + " and waiting for an order \n")
     
     ##################################################################

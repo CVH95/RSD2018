@@ -12,7 +12,8 @@ import random
 import time
 
 _ip = str(sys.argv[1])
-_port = 5000
+#_ip = 'localhost'
+_port = 6000
 
 print ("PLC running TCP/IP Server on http://" + _ip + ":" + str(_port) + "/")
 

@@ -90,28 +90,7 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
     
     # Instance to global score
     global global_score
-
-    print ("Status: CONNECTED")# in http://" + server_address[0] + ":" + str(server_address[1]) + "/")
-
-    hello = 'hi'
-    h = hello.encode()
-    sock.send(h)
-
-    print ("Sent hello message")
-
-    # Wait for the PLC to ask for orders
-    while True:
-        qa = sock.recv(1024)
-        q = qa.decode()
-        if str(q) == 'new':
-            print ("Received PLC request: " + str(q))
-            print ("Sending data.")
-            break
-        else:
-            print ("Received wrong request from PLC: " + str(q))
-    
-    # GET and PUT the order HERE
-
+     
     # Prepair data
     d = str(_plc[0]) + ',' + str(_plc[1]) + ',' + str(_plc[2])
     print ("Sending the order over socket: " + d)
@@ -129,7 +108,7 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
             print ("Server's reply: " + str(rec))
             if str(rec) == 'ok':
                 print ("The server received the order correctly.")
-                printm ("Waiting for updates...")
+                print ("Waiting for updates...")
                 while True:
                     rcpt = sock.recv(1024)
                     _state = rcpt.decode()

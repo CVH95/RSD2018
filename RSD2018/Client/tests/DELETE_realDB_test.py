@@ -6,13 +6,13 @@ def deletion(_url, path, id, ticket):
     body = {"ticket":ticket}
     _idd = '/' + str(id)
     d_url = _url + path + _idd
-    return requests.delete(d_url, data=json.dumps(body))
+    return requests.delete(d_url, json=body)
 
-_host = 'localhost'
-_url = 'http://' + _host + ':5000'
+_host = '192.168.100.200'
+_url = 'http://' + _host
 _order = '/orders'
 
-_id = 142
+_id = 753
 _tk = 'EA4047'
 
 resp = deletion(_url, _order, _id, _tk)
