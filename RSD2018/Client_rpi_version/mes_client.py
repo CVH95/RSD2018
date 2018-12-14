@@ -26,14 +26,19 @@ mes_api._nCycles = 0
 mes_api.global_score = 0
 mes_api._orderCorrect = 1
 mes_api._points_ = 0
+mes_api._nStopped = 0
+mes_api._nRejected = 0
 _chrono_ = 0
 _init_time = mes_api.get_time(23)
 
 file = open("start_time.txt", "w")
-file.write("\n \n \n ")
-file.write("########### \n")
-file.write("# SUMMARY # \n")
-file.write("########### \n")
+file.write("\n \n \n")
+file.write("###########\n")
+file.write("# SUMMARY #\n")
+file.write("###########\n")
+file.write("\n")
+file.write("\n")
+file.write("RUNTIME:\n")
 file.write("The system was started " + _init_time + "\n")
 file.close()
 
@@ -216,9 +221,9 @@ try:
                 
                 # Check if the order parameters were correct
                 _how = mes_api._orderCorrect
-                if _how > 0:
-                    print ("Order was completed succesfully: " + str(_how) + ". Total time :" + str(_chrono_) + " seconds.")
-                    _acc_ = mes_api.count_points(_red_, _blue_, _yellow_, 1, _chrono_)
+                if _how > 0 and _how < 9:
+                    print ("Order was completed succesfully: " + str(_how) + ". Total time: " + str(_chrono_) + " seconds.")
+                    _acc_ = mes_api.count_points(_red_, _blue_, _yellow_, 1, _chrono_, _id)
                     mes_api._points_ = mes_api._points_ + _acc_
                     print ("Total orders completed: " + str(mes_api.global_score) + " boxes.")
                     print ("Total score: " + str(mes_api._points_) + " points.")
@@ -241,7 +246,7 @@ try:
                         print (deltime + "\n")
 
                         # Send email notification
-                        lal = "Order " + str(_id) + " completed. \n \n Total score: \n" + str(mes_api._points_) + " points. \n" + "\n"
+                        lal = "Order " + str(_id) + " completed. \n \n Total score: " + str(mes_api._points_) + " points. \n" + "\n"
                         delBody = succDel + "\n" + "\n" + lal + deltime
                         print (delBody)
                         #feedback_api.mail_feedback(putSub, delBody)                
@@ -257,9 +262,11 @@ try:
                             mes_api._nCycles = mes_api._nCycles + 1
                             print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
                             print ("\n \n \n")
-                    
-                else:
-                    print ("\n The order was REJECTED: " + str(_how))
+                
+                elif _how > 10: 
+                    print ("\n" + "The order was CANCELLED: " + str(_how))
+                    print ("Something went wrong while processing, the system went STOPPED")
+                    mes_api._nStopped = mes_api._nStopped + 1
                     mes_api._nCycles = mes_api._nCycles + 1
                     r11 = mes_api.delete_order(_url, _orders, _id, ticket)
                     if r11.status_code != 200:
@@ -269,6 +276,45 @@ try:
                         print (succDel)
                         deltime = mes_api.get_time(r11.status_code) 
                         print (deltime + "\n")
+                        # POST Log entry indicating deletion of the complete order
+                        cmnt = "Order " + str(_id) + " was STOPPED"
+                        r17 = mes_api.post_log(_url, _log, cell_id, cmnt, events_dict[6])
+                        if r17.status_code != 200:
+                            print ("Raised API Error on POST request. Status code " + str(r17.status_code))
+                        else:
+                            print ("POST request " + _url + _log + " succesful")
+                            r17time = mes_api.get_time(r17.status_code)
+                            print (r17time + "\n")
+                            mes_api._nCycles = mes_api._nCycles + 1
+                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
+                            print ("\n \n \n")
+                    print ("Starting a new cycle \n \n")
+                    
+                
+                else:
+                    print ("\n The order was REJECTED: " + str(_how))
+                    mes_api._nRejected = mes_api._nRejected + 1
+                    mes_api._nCycles = mes_api._nCycles + 1
+                    r11 = mes_api.delete_order(_url, _orders, _id, ticket)
+                    if r11.status_code != 200:
+                        print ("Raised API Error on DELETE request. Status code " + str(r11.status_code))
+                    else:
+                        succDel = "DELETE request " + _url + _orders + " succesful"
+                        print (succDel)
+                        deltime = mes_api.get_time(r11.status_code) 
+                        print (deltime + "\n")
+                        # POST Log entry indicating deletion of the complete order
+                        cmnt = "Order " + str(_id) + " was REJECTED"
+                        r18 = mes_api.post_log(_url, _log, cell_id, cmnt, events_dict[0])
+                        if r18.status_code != 200:
+                            print ("Raised API Error on POST request. Status code " + str(r18.status_code))
+                        else:
+                            print ("POST request " + _url + _log + " succesful")
+                            r18time = mes_api.get_time(r18.status_code)
+                            print (r18time + "\n")
+                            mes_api._nCycles = mes_api._nCycles + 1
+                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
+                            print ("\n \n \n")
                     print ("Starting a new cycle \n \n")
                     
 except KeyboardInterrupt:

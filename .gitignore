@@ -15,9 +15,20 @@ RSD2018/Client_rpi_version/feedback_api.pyc
 RSD2018/Server/__pycache__/
 RSD2018/Client/__pycache__/
 RSD2018/Client_rpi_version/__pycache__/
+RSD2918/plc_tests/__pycache__/
 
 # Ignore Virtual Environment files
 RSD2018/Server/venv/
 
 # Ignore full Server directory
 RSD2018/Server/
+
+# Ignore PLC test
+RSD2018/plc_tests/
+
+# Ignore Client
+RSD2018/Client/
+
+# Ignore .txt
+RSD2018/Client_rpi_version/start_time.txt
+RSD2018/Client_rpi_version/stats.txt

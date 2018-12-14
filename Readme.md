@@ -2,6 +2,8 @@
 
 RESTful API designed for the project in the course Robot Systems Design (University of Southern Denmark). The objective is to run and process the orders that the robot workcell has to do. Cell number: 3.
 
+## 1. Specifications
+
 **Software requirments:**
 
  - Python3 venv virtual environment to run the server.
@@ -9,6 +11,41 @@ RESTful API designed for the project in the course Robot Systems Design (Univers
  - MySQL.
  - Flask SQL-alchemy.
  - Python Requests and PyMySQL for the client side.
+ 
+ **Project Organization:**
+ 
+ - _Client\_rpi\_version_ directory.
+     - mes\_api.py
+     - feedback\_api.py
+     - mes\_client.py
+     - initia.py
+ - _PLC/_ directory.
+     - plc\_fake\_server.py
+ - _Scripts/_ directory.
+     - run\_workcell.sh
+     - test\_connectivity.sh
+ - _Utils/_ directory.
+     - DELETE\_realDB\_test.py
+     
+## 2. Quick Guide
+
+### 2.1. Installation
+
+### 2.2. Usage
+
+## Authors
+
+## References
+
+ - Flask [Installation](http://flask.pocoo.org/docs/1.0/installation/#python-version).
+ - Flask [Quickstart](http://flask.pocoo.org/docs/1.0/quickstart/).
+ - [PyMySQL](https://pymysql.readthedocs.io/en/latest/user/examples.html) examples.
+ - [Flask-MySQL](https://flask-mysql.readthedocs.io/en/latest/) extension.
+ - Creating a WebApp from scratch using Python Flask and MySQL [tutorial](https://code.tutsplus.com/es/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972).
+ - [Simultaneous WiFi and Ethernet access](http://www.knight-of-pi.org/setup-simultanous-ethernet-and-wifi-access-for-the-raspberry-pi-3/) for Raspberry Pi.
+ - [Send emails](https://www.pythonforbeginners.com/code-snippets-source-code/using-python-to-send-email) with Python.
+ - Run bash script from desktop [icon](http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/desktop-shortcuts).
+
 
 ## 1. Server 
 
@@ -422,13 +459,3 @@ Disabled email functionality because RSD MES master network does not allow inter
  It is due to missing `con.close()` statement (closing the connection to the database after adding a new job). This issue makes the function that adds jobs to get stuck after the first entry in the database. However, it does not affect the REST API and that is why the other parts of the server work, but it does not create jobs.
 
 
-## References
-
- - Flask [Installation](http://flask.pocoo.org/docs/1.0/installation/#python-version).
- - Flask [Quickstart](http://flask.pocoo.org/docs/1.0/quickstart/).
- - [PyMySQL](https://pymysql.readthedocs.io/en/latest/user/examples.html) examples.
- - [Flask-MySQL](https://flask-mysql.readthedocs.io/en/latest/) extension.
- - Creating a WebApp from scratch using Python Flask and MySQL [tutorial](https://code.tutsplus.com/es/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972).
- - [Simultaneous WiFi and Ethernet access](http://www.knight-of-pi.org/setup-simultanous-ethernet-and-wifi-access-for-the-raspberry-pi-3/) for Raspberry Pi.
- - [Send emails](https://www.pythonforbeginners.com/code-snippets-source-code/using-python-to-send-email) with Python.
- - Run bash script from desktop [icon](http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/desktop-shortcuts).

@@ -12,6 +12,14 @@ import sys
 # Carlos, Caroline, Daniel
 
 # Global variables
+longest_order = 0
+largest_order = 0
+lowest_order = 100
+lo_id = 0
+la_id = 0
+lw_id = 0
+slowest = 0
+fastest = 0
 global_score = int()
 _nCycles = int()
 _orderCorrect = 1
@@ -22,6 +30,8 @@ accumulated_time = 0
 total_blue = 0
 total_red = 0
 total_yellow = 0
+_nStopped = 0
+_nRejected = 0
 
 
 # Print current timestamp
@@ -96,44 +106,82 @@ def delete_order(_url, path, id, ticket):
 
 
 # Keep up the score and statistics
-def count_points(red, blue, yellow, box, chrono):
+def count_points(red, blue, yellow, box, chrono, _id):
     
     # Save Statistics
     global points
+    global longest_order
     global accumulated_time
     global total_blue
     global total_red
     global total_yellow
     global max_time
     global min_time
+    global lo_id
+    global slowest
+    global fastest
+    global largest_order
+    global la_id
+    global lowest_order
+    global lw_id
     
     # Save timing
     accumulated_time = accumulated_time + chrono
     if chrono > max_time:
         max_time = chrono
+        slowest = _id
         print("New record of slowest packaging")
     else:
         max_time = max_time
+        slowest = slowest
     
     if chrono < min_time:
         min_time = chrono
+        fastest = _id
         print("New record of fastest packaging")
     else:
         min_time = min_time
+        fastest = fastest
         
     # Save brick count
     total_blue = total_blue + blue
     total_red = total_red + red
     total_yellow = total_yellow + yellow
+    nBricks = yellow + blue + red
+    if nBricks > longest_order:
+        longest_order = nBricks
+        lo_id = _id
+        print("New record of largest order")
+    else:
+        longest_order = longest_order
+        lo_id = lo_id
+        
+    add = blue*1 + red*3 + yellow*5 + box*2    
+        
+    if add > largest_order:
+        largest_order = add
+        la_id = _id
+        print("New record of highest scoring order")
+    else:
+        largest_order = largest_order
+        la_id = la_id
     
+    if add < lowest_order:
+        lowest_order = add
+        lw_id = _id
+        print("New record of lowest scoring order")
+    else:
+        lowest_order = lowest_order
+        lw_id = lw_id
+    
+    # Set the final score
     if chrono <= 60:
-        add = blue*1 + red*3 + yellow*5 + box*2
         points = points + add
         return add
     else:
-        add = -10
+        add = add - 10
         points = points + add
-        return -10
+        return add
 
 
 # PLC communication during the processing of the order
@@ -171,8 +219,13 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
                         print ("PackML state update: " + events[int(_state)])
                         global_score = global_score + 1
                         break
+                    elif int(_state) == 6:
+                        _orderCorrect = 23
+                        print ("Server's reply: " + _state)
+                        print ("PackML state update: " + events[int(_state)])
+                        break
                     else:
-                        if((int(_state)>=0 and int(_state)<2) or (int(_state)>=3 and int(_state)<=6)): 
+                        if((int(_state)>=0 and int(_state)<2) or (int(_state)>=3 and int(_state)<6)): 
                             print ("Server's reply: " + _state)
                             print ("PackML state update: " + events[int(_state)])
                             evt = events[int(_state)]
@@ -205,6 +258,8 @@ class manager:
     def __del__(self):
         global global_score
         global _nCycles
+        global _nStopped
+        global _nRejected
         global points
         global accumulated_time
         global total_blue
@@ -212,6 +267,14 @@ class manager:
         global total_yellow
         global max_time
         global min_time
+        global longest_order
+        global lo_id
+        global slowest
+        global fastest
+        global largest_order
+        global la_id
+        global lowest_order
+        global lw_id
         
         avg_time = accumulated_time/global_score
         minn = "{0:.2f}".format(min_time)
@@ -222,19 +285,44 @@ class manager:
         file = open("stats.txt","w")
         file.write("The system was stopped " + ft + "\n")
         file.write("Total number of cycles: " + str(_nCycles) + "\n")
+        file.write("\n")
+        file.write("PACKAGING:\n")
+        file.write("\n")
         file.write("Total number of packed boxes: " + str(global_score) + "\n")
         file.write("Total score: " + str(points) + "\n")
         file.write("Total number of packed blue bricks: " + str(total_blue) + "\n")
         file.write("Total number of packed red bricks: " + str(total_red) + "\n")
         file.write("Total number of packed yellow: " + str(total_yellow) + "\n")
-        file.write("Fastest order packed: " + str(minn) + " seconds \n")
+        file.write("Largest order packed: \n")
+        file.write("  >> id: " + str(lo_id) + "\n")
+        file.write("  >> Amount of bricks: " + str(longest_order) + "\n")
+        file.write("Order with the highest score: \n")
+        file.write("  >> id: " + str(la_id) + "\n")
+        file.write("  >> Amount of bricks: " + str(largest_order) + "\n")
+        file.write("Order with the lowest score: \n")
+        file.write("  >> id: " + str(lw_id) + "\n")
+        file.write("  >> Amount of bricks: " + str(lowest_order) + "\n")
+        file.write("\n")
+        file.write("OPERATING SPEED:\n")
+        file.write("\n")
+        file.write("Fastest order packed: \n")
+        file.write("  >> id: " + str(fastest) + "\n")
+        file.write("  >> Time: " + str(minn) + " seconds \n")
+        file.write("Slowest order packed: \n")
+        file.write("  >> id: " + str(slowest) + "\n")
         if max_time <= 60:
-            file.write("Slowest order packed: " + str(maxx) + " seconds \n")
+            file.write("  >> Time: " + str(maxx) + " seconds \n")
         else:
             in_minutes = max_time/60
             p = "{0:.2f}".format(in_minutes)
-            file.write("Slowest order packed: " + str(p) + " minutes \n")
+            file.write("  >> Time: " + str(p) + " minutes \n")
         
         file.write("Average time used to pack orders: " + str(avgg) + " seconds \n")
+        file.write("\n")
+        file.write("INTERRUPTIONS:\n")
+        file.write("\n")
+        file.write("Times the system was stopped: " + str(_nStopped) + "\n")
+        file.write("Number of rejected orders: " + str(_nRejected) + "\n")
+        file.write("\n")
         file.write("WorkCell #" + str(self.workcell) + " shutdown \n")
         file.close()
