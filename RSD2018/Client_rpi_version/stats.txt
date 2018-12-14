@@ -1,3 +1,0 @@
-Total number of cycles: 0
-Total number of packed boxes: 0
-WorkCell #3 shutdown 
