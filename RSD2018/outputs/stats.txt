@@ -1,0 +1,53 @@
+###########
+# SUMMARY #
+###########
+
+
+RUNTIME:
+
+
+The system was started On Sat Dec 15 17:26:25 2018 - Status code = 23
+The system was stopped On Sat Dec 15 17:53:00 2018 - Status code = 9
+Total number of cycles: 23
+
+
+PACKAGING:
+
+
+Total number of packed boxes: 21
+Total score: 229
+Total number of packed blue bricks: 30
+Total number of packed red bricks: 34
+Total number of packed yellow: 17
+Total number of packed bricks: 81
+Largest order packed:
+  >> id: 1056
+  >> Amount of bricks: 7
+Order with the highest score:
+  >> id: 1057
+  >> Points: 24
+Order with the lowest score:
+  >> id: 1054
+  >> Points: 5
+
+
+OPERATING SPEED:
+
+
+Fastest order packed:
+  >> id: 1072
+  >> Time: 17.06 seconds
+Slowest order packed:
+  >> id: 1063
+  >> Time: 2.16 minutes
+Average time used to pack orders: 46.99 seconds
+
+
+INTERRUPTIONS:
+
+
+Times the system was stopped: 1
+Number of rejected orders: 0
+
+
+WorkCell #3 shutdown

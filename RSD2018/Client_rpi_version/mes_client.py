@@ -29,7 +29,7 @@ mes_api._points_ = 0
 mes_api._nStopped = 0
 mes_api._nRejected = 0
 _chrono_ = 0
-_init_time = mes_api.get_time(23)
+mes_api._init_time = mes_api.get_time(23)
 
 file = open("start_time.txt", "w")
 file.write("\n \n \n")
@@ -38,8 +38,9 @@ file.write("# SUMMARY #\n")
 file.write("###########\n")
 file.write("\n")
 file.write("\n")
+file.write("\n")
 file.write("RUNTIME:\n")
-file.write("The system was started " + _init_time + "\n")
+file.write("The system was started " + mes_api._init_time + "\n")
 file.close()
 
 _wc = mes_api.manager(cell_id)

@@ -12,6 +12,7 @@ import sys
 # Carlos, Caroline, Daniel
 
 # Global variables
+_init_time = str()
 longest_order = 0
 largest_order = 0
 lowest_order = 100
@@ -32,6 +33,7 @@ total_red = 0
 total_yellow = 0
 _nStopped = 0
 _nRejected = 0
+_paused = 0
 
 
 # Print current timestamp
@@ -124,9 +126,13 @@ def count_points(red, blue, yellow, box, chrono, _id):
     global la_id
     global lowest_order
     global lw_id
+    global _paused
     
     # Save timing
-    accumulated_time = accumulated_time + chrono
+    if chrono < 105:
+        accumulated_time = accumulated_time + chrono
+    else:
+        _paused = _paused + 1
     if chrono > max_time:
         max_time = chrono
         slowest = _id
@@ -237,14 +243,15 @@ def plc_control(sock, _plc, events, _url, _path, cid, cmt):
                 break
             
             else:
+                
                 print ("Server's reply: " + str(rec))
                 print ("An error ocurred while sending the order. Re-sending...")
                 _orderCorrect = -1
                 #plc_control(sock, _plc, events, _url, _path, cid, cmt)
                 break
         else:
-            print ("Did not receive anything after sending the order")    
-    
+            print ("Did not receive anything after sending the order")
+
 
 class manager:
 
@@ -275,54 +282,66 @@ class manager:
         global la_id
         global lowest_order
         global lw_id
+        global _init_time
+        global _paused
         
-        avg_time = accumulated_time/global_score
+        total_bricks = total_blue + total_red + total_yellow
+        avg_time = accumulated_time/(global_score - _paused)
         minn = "{0:.2f}".format(min_time)
         maxx = "{0:.2f}".format(max_time)
         avgg = "{0:.2f}".format(avg_time)
         ft = get_time(9)
         
-        file = open("stats.txt","w")
-        file.write("The system was stopped " + ft + "\n")
-        file.write("Total number of cycles: " + str(_nCycles) + "\n")
-        file.write("\n")
-        file.write("PACKAGING:\n")
-        file.write("\n")
-        file.write("Total number of packed boxes: " + str(global_score) + "\n")
-        file.write("Total score: " + str(points) + "\n")
-        file.write("Total number of packed blue bricks: " + str(total_blue) + "\n")
-        file.write("Total number of packed red bricks: " + str(total_red) + "\n")
-        file.write("Total number of packed yellow: " + str(total_yellow) + "\n")
-        file.write("Largest order packed: \n")
-        file.write("  >> id: " + str(lo_id) + "\n")
-        file.write("  >> Amount of bricks: " + str(longest_order) + "\n")
-        file.write("Order with the highest score: \n")
-        file.write("  >> id: " + str(la_id) + "\n")
-        file.write("  >> Amount of bricks: " + str(largest_order) + "\n")
-        file.write("Order with the lowest score: \n")
-        file.write("  >> id: " + str(lw_id) + "\n")
-        file.write("  >> Amount of bricks: " + str(lowest_order) + "\n")
-        file.write("\n")
-        file.write("OPERATING SPEED:\n")
-        file.write("\n")
-        file.write("Fastest order packed: \n")
-        file.write("  >> id: " + str(fastest) + "\n")
-        file.write("  >> Time: " + str(minn) + " seconds \n")
-        file.write("Slowest order packed: \n")
-        file.write("  >> id: " + str(slowest) + "\n")
+        print("\n \n \n")
+        print("###########")
+        print("# SUMMARY #")
+        print("###########")
+        print("\n")
+        print("RUNTIME:")
+        print("\n")
+        print("The system was started " + _init_time)
+        print("The system was stopped " + ft)
+        print("Total number of cycles: " + str(_nCycles))
+        print("\n")
+        print("PACKAGING:")
+        print("\n")
+        print("Total number of packed boxes: " + str(global_score))
+        print("Total score: " + str(points))
+        print("Total number of packed blue bricks: " + str(total_blue))
+        print("Total number of packed red bricks: " + str(total_red))
+        print("Total number of packed yellow: " + str(total_yellow))
+        print("Total number of packed bricks: " + str(total_bricks))
+        print("Largest order packed:")
+        print("  >> id: " + str(lo_id))
+        print("  >> Amount of bricks: " + str(longest_order))
+        print("Order with the highest score:")
+        print("  >> id: " + str(la_id))
+        print("  >> Points: " + str(largest_order))
+        print("Order with the lowest score:")
+        print("  >> id: " + str(lw_id))
+        print("  >> Points: " + str(lowest_order))
+        print("\n")
+        print("OPERATING SPEED:")
+        print("\n")
+        print("Fastest order packed:")
+        print("  >> id: " + str(fastest))
+        print("  >> Time: " + str(minn) + " seconds")
+        print("Slowest order packed:")
+        print("  >> id: " + str(slowest))
         if max_time <= 60:
-            file.write("  >> Time: " + str(maxx) + " seconds \n")
+            print("  >> Time: " + str(maxx) + " seconds")
         else:
             in_minutes = max_time/60
             p = "{0:.2f}".format(in_minutes)
-            file.write("  >> Time: " + str(p) + " minutes \n")
+            print("  >> Time: " + str(p) + " minutes")
         
-        file.write("Average time used to pack orders: " + str(avgg) + " seconds \n")
-        file.write("\n")
-        file.write("INTERRUPTIONS:\n")
-        file.write("\n")
-        file.write("Times the system was stopped: " + str(_nStopped) + "\n")
-        file.write("Number of rejected orders: " + str(_nRejected) + "\n")
-        file.write("\n")
-        file.write("WorkCell #" + str(self.workcell) + " shutdown \n")
-        file.close()
+        print("Average time used to pack orders: " + str(avgg) + " seconds")
+        print("\n")
+        print("INTERRUPTIONS:")
+        print("\n")
+        print("Times the system was stopped: " + str(_nStopped))
+        print("Number of rejected orders: " + str(_nRejected))
+        print("\n")
+        print("WorkCell #" + str(self.workcell) + " shutdown")
+        
+        #save_stats()
