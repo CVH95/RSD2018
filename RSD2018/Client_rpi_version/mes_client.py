@@ -261,7 +261,7 @@ try:
                             r4time = mes_api.get_time(r4.status_code)
                             print (r4time + "\n")
                             mes_api._nCycles = mes_api._nCycles + 1
-                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
+                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles. Score: " + str(mes_api._points_))
                             print ("\n \n \n")
                 
                 elif _how > 10: 
@@ -286,8 +286,7 @@ try:
                             print ("POST request " + _url + _log + " succesful")
                             r17time = mes_api.get_time(r17.status_code)
                             print (r17time + "\n")
-                            mes_api._nCycles = mes_api._nCycles + 1
-                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
+                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles. Score: " + str(mes_api._points_))
                             print ("\n \n \n")
                     print ("Starting a new cycle \n \n")
                     
@@ -313,8 +312,7 @@ try:
                             print ("POST request " + _url + _log + " succesful")
                             r18time = mes_api.get_time(r18.status_code)
                             print (r18time + "\n")
-                            mes_api._nCycles = mes_api._nCycles + 1
-                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles.")
+                            print ("The system has been running for " + str(mes_api._nCycles) + " cycles. Score: " + str(mes_api._points_))
                             print ("\n \n \n")
                     print ("Starting a new cycle \n \n")
                     
