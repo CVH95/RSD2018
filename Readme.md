@@ -67,7 +67,7 @@ The srcipt _Utils/DELETE\_realDB\_test.py_ can be used to flush taken orders tha
 ## Note
 
  - For more details on the project, go to the [Wiki](https://github.com/CVH95/RSD2018/wiki).
- - Link to YouTube video demonstration of the workcell running.
+ - Link to [YouTube](https://www.youtube.com/watch?v=LJqZS0AlBJw&t=23s) video demonstration of the workcell running.
 
 ## Authors
 
