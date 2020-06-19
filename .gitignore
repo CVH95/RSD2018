@@ -1,9 +1,3 @@
-# Ignore backup file 
-RSD2018/Server/original.rsd_2018_app.py.bkp
-
-# Ignore old server version
-RSD2018/Server/old_rsd_2018_app.py
-
 # Ignore .pyc
 # Ignore old server version
 RSD2018/Client/mes_api.pyc
@@ -19,9 +13,6 @@ RSD2918/plc_tests/__pycache__/
 
 # Ignore Virtual Environment files
 RSD2018/Server/venv/
-
-# Ignore full Server directory
-RSD2018/Server/
 
 # Ignore PLC test
 RSD2018/plc_tests/
